@@ -8,9 +8,13 @@
 
 - [Rails 7.1.3.2](https://api.rubyonrails.org/v7.1.3.2).
 
+## Conventions
+
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0).
+
 ## FAQ
 
-## What was the Rails new command?
+### What was the Rails new command?
 
 ```bash
 $ ruby -v
