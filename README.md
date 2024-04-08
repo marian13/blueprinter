@@ -30,7 +30,7 @@ cd ~/Projects/blueprinter && task tmuxinator:start
 
 This will start the project for you.
 
-Have a look at `.dev/tmuxinator.yml` if you are interested in what is happening under the hood.
+Have a look at [.dev/tmuxinator.yml](https://github.com/marian13/blueprinter/blob/main/.dev/.tmuxinator.yml) if you are interested in what is happening under the hood.
 
 ## FAQ
 
