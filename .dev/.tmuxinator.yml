@@ -1,0 +1,17 @@
+##
+# NOTE: Tmuxinator config options.
+# - https://github.com/tmuxinator/tmuxinator#create-a-project
+#
+name: blueprinter
+root: .
+
+on_project_start:
+  - task editor:open
+  - task github:open
+
+windows:
+  - main:
+      layout: even-vertical
+      root: .
+      panes:
+        - git status

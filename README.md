@@ -1,6 +1,6 @@
 # Blueprinter
 
-## Requirements
+## Prerequisites
 
 - [Ruby 3.3.0](https://ruby-doc.org/3.3.0).
 
@@ -8,9 +8,29 @@
 
 - [Rails 7.1.3.2](https://api.rubyonrails.org/v7.1.3.2).
 
-## Conventions
+- [Task](https://taskfile.dev).
 
-- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0).
+- [tmux](https://github.com/tmux/tmux).
+
+- [Tmuxinator](https://github.com/tmuxinator/tmuxinator).
+
+- [VS Code](https://code.visualstudio.com).
+
+- [macOS](https://www.apple.com/macos/sonoma).
+
+- [Google Chrome](https://www.google.com/intl/en_us/chrome).
+
+## Development
+
+Copy and run the command below:
+
+```bash
+cd ~/Projects/blueprinter && task tmuxinator:start
+```
+
+This will start the project for you.
+
+Have a look at `.dev/tmuxinator.yml` if you are interested in what is happening under the hood.
 
 ## FAQ
 
@@ -34,3 +54,9 @@ Rails 7.1.3.2
 ```bash
 $ rails new blueprinter --database=postgresql
 ```
+
+## Contributing
+
+### Conventions
+
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0).
