@@ -1,24 +1,32 @@
-# README
+# Blueprinter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+- [Ruby 3.3.0](https://ruby-doc.org/3.3.0).
 
-* Ruby version
+- [Bundler 2.5.7](https://bundler.io/v2.5/man/bundle-install.1.html).
 
-* System dependencies
+- [Rails 7.1.3.2](https://api.rubyonrails.org/v7.1.3.2).
 
-* Configuration
+## FAQ
 
-* Database creation
+## What was the Rails new command?
 
-* Database initialization
+```bash
+$ ruby -v
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x86_64-darwin22]
+```
 
-* How to run the test suite
+```bash
+$ bundler -v
+Bundler version 2.5.7
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+$ rails -v
+Rails 7.1.3.2
+```
 
-* Deployment instructions
-
-* ...
+```bash
+$ rails new blueprinter --database=postgresql
+```
