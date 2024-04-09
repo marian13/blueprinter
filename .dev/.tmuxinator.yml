@@ -14,4 +14,5 @@ windows:
       layout: even-vertical
       root: .
       panes:
+        - RAILS_PORT=8400 task server:open
         - git status

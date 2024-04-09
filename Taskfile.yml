@@ -20,6 +20,19 @@ tasks:
     cmds:
       - open -na "Google Chrome" --args --new-window --incognito "https://github.com/marian13/blueprinter"
 
+  server:
+    cmds:
+      - bundle exec rails server --port {{.RAILS_PORT}}
+    requires:
+      vars: [RAILS_PORT]
+
+  server:open:
+    cmds:
+      - open -na "Google Chrome" --args --new-window --incognito "http://localhost:{{.RAILS_PORT}}"
+      - task: server
+    requires:
+      vars: [RAILS_PORT]
+
   ##
   # NOTE: Dev only command.
   #
