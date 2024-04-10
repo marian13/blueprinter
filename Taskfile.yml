@@ -5,6 +5,41 @@ version: '3'
 # - https://taskfile.dev/usage/#task-directory
 #
 tasks:
+  docker:server:
+    cmds:
+      - rm tmp/pids/server.pid 2> /dev/null || true
+      ##
+      # NOTE: `-b 0.0.0.0` makes Rails server accessible from all hosts.
+      # - https://stackoverflow.com/a/29084070/12201472
+      #
+      - |
+        docker compose run \
+          --rm \
+          --publish {{.RAILS_PORT}}:{{.RAILS_PORT}} \
+          rails bash -c '
+            bundle exec rails db:create \
+              && bundle exec rails db:migrate \
+              && bundle exec rails server --port {{.RAILS_PORT}} -b 0.0.0.0
+          '
+    requires:
+      vars: [RAILS_PORT]
+
+  docker:server:open:
+    cmds:
+      - open -na "Google Chrome" --args --new-window --incognito "http://localhost:{{.RAILS_PORT}}"
+      - task: docker:server
+    requires:
+      vars: [RAILS_PORT]
+
+  ##
+  # NOTE: Dev only command.
+  # NOTE: macOS specific command.
+  # NOTE: Used by `tmuxinator`.
+  #
+  docker:start:
+    cmds:
+      - open -a Docker
+
   ##
   # NOTE: Dev only command.
   #
@@ -20,22 +55,13 @@ tasks:
     cmds:
       - open -na "Google Chrome" --args --new-window --incognito "https://github.com/marian13/blueprinter"
 
-  server:
+  install:
     cmds:
-      - bundle exec rails server --port {{.RAILS_PORT}}
-    requires:
-      vars: [RAILS_PORT]
-
-  server:open:
-    cmds:
-      - open -na "Google Chrome" --args --new-window --incognito "http://localhost:{{.RAILS_PORT}}"
-      - task: server
-    requires:
-      vars: [RAILS_PORT]
+      - bundle install
 
   ##
   # NOTE: Dev only command.
   #
   tmuxinator:start:
     cmds:
-      - tmuxinator start blueprinter --project-config=.dev/.tmuxinator.yml
+      - direnv exec . tmuxinator start blueprinter --project-config=.dev/.tmuxinator.yml

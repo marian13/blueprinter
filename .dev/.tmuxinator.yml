@@ -7,6 +7,7 @@ root: .
 
 on_project_start:
   - task editor:open
+  - task docker:start
   - task github:open
 
 windows:
@@ -14,5 +15,5 @@ windows:
       layout: even-vertical
       root: .
       panes:
-        - RAILS_PORT=8400 task server:open
+        - RAILS_PORT=8400 task docker:server:open
         - git status

@@ -1,0 +1,41 @@
+version: "3.9"
+
+##
+# IMPORTANT: Docker compose creates a shared network for its containers.
+# As a result, ports from the right side are only accessible between containers.
+# At the same time, ports from left side are only accessible by host.
+# For example:
+#
+#   redis:
+#     ports:
+#       - 6380:6379
+#
+# To access Redis from container - use `redis://redis:6379`.
+# To access Redis from host - use `redis://localost:6380`.
+#
+services:
+  postgres:
+    container_name: ${PROJECT_NAME}_postgres
+    image: postgres:${POSTGRES_VERSION}
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./tmp/volumes/postgres:/var/lib/postgresql/data
+
+  rails:
+    build:
+      context: .
+      dockerfile: ./docker/development/rails/Dockerfile
+    container_name: ${PROJECT_NAME}_rails
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_VERSION: ${POSTGRES_VERSION}
+      PROJECT_NAME: ${PROJECT_NAME}
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/project
