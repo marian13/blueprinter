@@ -2,21 +2,23 @@
 
 ## Prerequisites
 
-- [Ruby 3.3.0](https://ruby-doc.org/3.3.0).
+- [macOS](https://www.apple.com/macos/sonoma).
 
-- [Bundler 2.5.7](https://bundler.io/v2.5/man/bundle-install.1.html).
-
-- [Rails 7.1.3.2](https://api.rubyonrails.org/v7.1.3.2).
-
-- [Task](https://taskfile.dev).
+- [Homebrew](https://brew.sh).
 
 - [tmux](https://github.com/tmux/tmux).
 
 - [Tmuxinator](https://github.com/tmuxinator/tmuxinator).
 
-- [VS Code](https://code.visualstudio.com).
+- [asdf](https://asdf-vm.com/#/core-manage-asdf).
 
-- [macOS](https://www.apple.com/macos/sonoma).
+- [direnv](https://github.com/asdf-community/asdf-direnv)
+
+- [Docker](https://www.docker.com/products/docker-desktop).
+
+- [Task](https://taskfile.dev).
+
+- [VS Code](https://code.visualstudio.com).
 
 - [Google Chrome](https://www.google.com/intl/en_us/chrome).
 
