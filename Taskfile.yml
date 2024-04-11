@@ -5,6 +5,14 @@ version: '3'
 # - https://taskfile.dev/usage/#task-directory
 #
 tasks:
+  docker:bash:
+    cmds:
+      - docker compose run --rm rails bash
+    interactive: true
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   docker:server:
     cmds:
       - rm tmp/pids/server.pid 2> /dev/null || true

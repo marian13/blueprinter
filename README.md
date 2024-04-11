@@ -12,7 +12,7 @@
 
 - [asdf](https://asdf-vm.com/#/core-manage-asdf).
 
-- [direnv](https://github.com/asdf-community/asdf-direnv)
+- [direnv](https://github.com/asdf-community/asdf-direnv).
 
 - [Docker](https://www.docker.com/products/docker-desktop).
 
