@@ -78,3 +78,5 @@ $ rails new blueprinter --database=postgresql
 ### Tests
 
 - [RSpec](https://github.com/rspec/rspec-rails).
+
+- [Turnip](https://github.com/jnicklas/turnip).

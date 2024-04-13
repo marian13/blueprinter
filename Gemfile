@@ -75,5 +75,13 @@ end
 # - https://github.com/rspec/rspec-rails
 #
 group :development, :test do
-  gem 'rspec-rails', '~> 6.1.0'
+  gem "rspec-rails", "~> 6.1.0"
+end
+
+##
+# Gherkin extension for RSpec.
+# - https://github.com/jnicklas/turnip
+#
+group :test do
+  gem "turnip", "~> 4.4.0"
 end

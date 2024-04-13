@@ -95,6 +95,11 @@ GEM
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
+    cucumber-gherkin (28.0.0)
+      cucumber-messages (>= 19.1.4, < 24)
+    cucumber-messages (23.0.0)
+    cuke_modeler (3.21.0)
+      cucumber-gherkin (< 29.0)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -208,6 +213,10 @@ GEM
     reline (0.5.0)
       io-console (~> 0.5)
     rexml (3.2.6)
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.0)
@@ -247,6 +256,9 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    turnip (4.4.0)
+      cuke_modeler (~> 3.15)
+      rspec (>= 3.0, < 4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     web-console (4.2.1)
@@ -286,6 +298,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   turbo-rails
+  turnip (~> 4.4.0)
   tzinfo-data
   web-console
 

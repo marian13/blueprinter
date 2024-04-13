@@ -5,6 +5,9 @@ version: '3'
 # - https://taskfile.dev/usage/#task-directory
 #
 tasks:
+  ##
+  # NOTE: `docker compose run` automatically builds image if is not built yet.
+  #
   docker:bash:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash
@@ -14,8 +17,6 @@ tasks:
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   ##
-  # NOTE: `docker run` automatically builds image if is not built yet.
-  #
   # NOTE:
   #   `task install` is executed during image build process.
   #   But it is impossible to have access to the volumes during the image build process.
@@ -25,10 +26,11 @@ tasks:
   #
   # NOTE:
   #   `docker compose up` builds all images listed in the `docker-compose.yml` and then starts all containers.
-  #   This is too resource heavy most of the time, that is `docker compose run` and Docker Compose `depends_on` are used instead.
+  #   This is too resource heavy most of the time, that is why `docker compose build` and `docker compose run` with Docker Compose `depends_on` are used instead.
   #
   docker:build:
     cmds:
+      - docker compose -f docker/development/docker-compose.yml build rails
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c "task install"
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
@@ -72,6 +74,13 @@ tasks:
           '
     requires:
       vars: [RAILS_PORT]
+
+  docker:turnip:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'bundle exec rspec --require turnip/rspec spec/features'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   docker:server:open:
     cmds:
