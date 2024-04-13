@@ -72,3 +72,9 @@ $ rails new blueprinter --database=postgresql
 ### Conventions
 
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0).
+
+## Stack
+
+### Tests
+
+- [RSpec](https://github.com/rspec/rspec-rails).

@@ -45,6 +45,15 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  docker:rspec:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'bundle exec rspec'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+    requires:
+      vars: [RAILS_PORT]
+
   docker:server:
     cmds:
       - rm tmp/pids/server.pid 2> /dev/null || true
