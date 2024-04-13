@@ -1,3 +1,7 @@
+##
+# IMPORTANT: Run `task docker:build` everytime any gem in `Gemfile` is changed.
+##
+
 source "https://rubygems.org"
 
 ruby "3.3.0"
@@ -64,4 +68,12 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+end
+
+##
+# RSpec for Rails 6+.
+# - https://github.com/rspec/rspec-rails
+#
+group :development, :test do
+  gem 'rspec-rails', '~> 6.1.0'
 end
