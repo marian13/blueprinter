@@ -1,13 +1,16 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
+import Logger from "tools/logger";
 
 export default class extends Controller {
   static targets = ["theme", "icon"];
 
   connect() {
-    console.log(this.identifier, this.element);
+    Logger.info(`Connected ${this.identifier} controller`);
   }
 
   toggle() {
+    Logger.info(`Triggered ${this.identifier}#toggle action`);
+
     if (this.theme === "light") return this.theme = "dark";
     if (this.theme === "dark") return this.theme = "light";
 
