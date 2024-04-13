@@ -13,6 +13,17 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  ##
+  # NOTE: Importmap for Rails.
+  # - https://github.com/rails/importmap-rails?tab=readme-ov-file#using-npm-packages-via-javascript-cdns
+  #
+  docker:importmap:pin:
+    cmds:
+      - docker compose run --rm rails bash -c './bin/importmap pin {{.NPM_PACKAGE}}'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   docker:server:
     cmds:
       - rm tmp/pids/server.pid 2> /dev/null || true
