@@ -16,4 +16,5 @@ windows:
       root: .
       panes:
         - RAILS_PORT=8400 task docker:server:open
+        - task docker:bash
         - git status
