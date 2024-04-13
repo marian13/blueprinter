@@ -20,11 +20,11 @@ services:
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - ./tmp/volumes/postgres:/var/lib/postgresql/data
+      - ../../docker/development/volumes/postgres:/var/lib/postgresql/data
 
   rails:
     build:
-      context: .
+      context: ../..
       dockerfile: ./docker/development/rails/Dockerfile
     container_name: ${PROJECT_NAME}_rails
     depends_on:
@@ -38,4 +38,4 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/project
+      - ../..:/project

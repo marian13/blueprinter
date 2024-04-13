@@ -33,3 +33,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+##
+# NOTE: Ignores `docker/development/volumes` content, but NOT the folder.
+#
+/docker/development/volumes/*
+!/docker/development/volumes/.gitkeep

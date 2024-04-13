@@ -7,7 +7,7 @@ version: '3'
 tasks:
   docker:bash:
     cmds:
-      - docker compose run --rm rails bash
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash
     interactive: true
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
@@ -29,7 +29,7 @@ tasks:
   #
   docker:build:
     cmds:
-      - docker compose run --rm rails bash -c "task install"
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c "task install"
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -40,7 +40,7 @@ tasks:
   #
   docker:importmap:pin:
     cmds:
-      - docker compose run --rm rails bash -c './bin/importmap pin {{.NPM_PACKAGE}}'
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c './bin/importmap pin {{.NPM_PACKAGE}}'
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -53,7 +53,9 @@ tasks:
       # - https://stackoverflow.com/a/29084070/12201472
       #
       - |
-        docker compose run \
+        docker compose \
+          -f docker/development/docker-compose.yml \
+          run \
           --rm \
           --publish {{.RAILS_PORT}}:{{.RAILS_PORT}} \
           rails bash -c '
