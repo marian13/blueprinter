@@ -51,8 +51,6 @@ tasks:
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
-    requires:
-      vars: [RAILS_PORT]
 
   docker:server:
     cmds:
@@ -77,7 +75,7 @@ tasks:
 
   docker:server:open:
     cmds:
-      - open -na "Google Chrome" --args --new-window --incognito "http://localhost:{{.RAILS_PORT}}"
+      - open -na "Google Chrome" --args --new-window --incognito "http://0.0.0.0:{{.RAILS_PORT}}"
       - task: docker:server
     requires:
       vars: [RAILS_PORT]
