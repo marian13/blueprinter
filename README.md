@@ -1,6 +1,16 @@
 # Blueprinter
 
-## Prerequisites
+## Development
+
+### Prerequisites
+
+Please, analyze the list of the development dependencies below.
+
+Most of them are not mandatory, but their configurations are committed directly to this repo.
+
+If you prefer to utilize any alternatives, feel free to do it, but the following commands in this README assume their usage.
+
+So it is up to you to translate them to the tool of your choice.
 
 - [macOS](https://www.apple.com/macos/sonoma).
 
@@ -22,7 +32,7 @@
 
 - [Google Chrome](https://www.google.com/intl/en_us/chrome).
 
-## Development
+## Environment
 
 Copy and run the command below:
 
