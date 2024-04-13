@@ -14,6 +14,27 @@ tasks:
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   ##
+  # NOTE: `docker run` automatically builds image if is not built yet.
+  #
+  # NOTE:
+  #   `task install` is executed during image build process.
+  #   But it is impossible to have access to the volumes during the image build process.
+  #   So `Gemfile` changes are NOT persisted inside `Gemfile.lock`.
+  #   That is why `task install` is executed for the second time by `docker compose run` since it has access to volumes.
+  #   This add more minutes to `task docker:build`, but eliminates the time required to debug unmodified `Gemfile.lock` issues.
+  #
+  # NOTE:
+  #   `docker compose up` builds all images listed in the `docker-compose.yml` and then starts all containers.
+  #   This is too resource heavy most of the time, that is `docker compose run` and Docker Compose `depends_on` are used instead.
+  #
+  docker:build:
+    cmds:
+      - docker compose run --rm rails bash -c "task install"
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  ##
   # NOTE: Importmap for Rails.
   # - https://github.com/rails/importmap-rails?tab=readme-ov-file#using-npm-packages-via-javascript-cdns
   #
