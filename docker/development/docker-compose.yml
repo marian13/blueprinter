@@ -1,19 +1,40 @@
 version: "3.9"
 
 ##
-# IMPORTANT: Docker compose creates a shared network for its containers.
-# As a result, ports from the right side are only accessible between containers.
-# At the same time, ports from left side are only accessible by host.
-# For example:
+# IMPORTANT:
+#   Docker compose creates a shared network for its containers.
+#   As a result, ports from the right side are only accessible between containers.
+#   At the same time, ports from left side are only accessible by host.
+#   For example:
 #
-#   redis:
-#     ports:
-#       - 6380:6379
+#     redis:
+#       ports:
+#         - 6380:6379
 #
-# To access Redis from container - use `redis://redis:6379`.
-# To access Redis from host - use `redis://localost:6380`.
+#   To access Redis from container - use `redis://redis:6379`.
+#   To access Redis from host - use `redis://localost:6380`.
 #
 services:
+  ##
+  # - https://github.com/SeleniumHQ/docker-selenium
+  # - https://hub.docker.com/r/selenium/standalone-chrome
+  #
+  chrome:
+    container_name: ${PROJECT_NAME}_chrome
+    image: selenium/standalone-chrome:${CHROME_VERSION}-chromedriver-${CHROMEDRIVER_VERSION}
+    ports:
+      ##
+      # NOTE: Open `http://localhost:${CHROME_HTTP_PORT}`. Password is `secret`.
+      #
+      - "${CHROME_HTTP_PORT}:7900"
+      - "${CHROME_PORT}:4444"
+      ##
+      # NOTE: Open `vnc://localhost:${CHROME_VNC_PORT}`. Password is `secret`.
+      #
+      - "${CHROME_VNC_PORT}:5900"
+    volumes:
+      - /dev/shm:/dev/shm
+
   postgres:
     container_name: ${PROJECT_NAME}_postgres
     image: postgres:${POSTGRES_VERSION}
@@ -35,6 +56,7 @@ services:
       POSTGRES_USERNAME: ${POSTGRES_USERNAME}
       POSTGRES_VERSION: ${POSTGRES_VERSION}
       PROJECT_NAME: ${PROJECT_NAME}
+      TURNIP_RAILS_PORT: ${TURNIP_RAILS_PORT}
     stdin_open: true
     tty: true
     volumes:
