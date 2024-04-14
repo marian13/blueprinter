@@ -1,6 +1,10 @@
 version: '3'
 
 ##
+# NOTE: `open` tasks only navigate/open apps. They are NOT running any other commands.
+##
+
+##
 # IMPORTANT: All tasks listed in this file should be executed from the root folder.
 # - https://taskfile.dev/usage/#task-directory
 #
@@ -36,6 +40,40 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  docker:chrome:build:
+    cmds:
+      - docker-compose -f docker/development/docker-compose.yml up --build --remove-orphans chrome
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:chrome:http:open:
+    cmds:
+      - open http://localhost:{{.CHROME_HTTP_PORT}} %>
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+    requires:
+      vars: [CHROME_HTTP_PORT]
+
+  docker:chrome:logs:
+    cmds:
+      - docker logs --follow {{.PROJECT_NAME}}_chrome
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+    requires:
+      vars: [PROJECT_NAME]
+
+  docker:chrome:vnc:open:
+    cmds:
+      - open vnc://localhost:{{.CHROME_VNC_PORT}} %>
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+    requires:
+      vars: [CHROME_VNC_PORT]
+
   ##
   # NOTE: Importmap for Rails.
   # - https://github.com/rails/importmap-rails?tab=readme-ov-file#using-npm-packages-via-javascript-cdns
@@ -50,6 +88,7 @@ tasks:
   docker:rspec:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'bundle exec rspec'
+    interactive: true
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -67,27 +106,43 @@ tasks:
           run \
           --rm \
           --publish {{.RAILS_PORT}}:{{.RAILS_PORT}} \
-          rails bash -c '
+          rails \
+          bash -c '
             bundle exec rails db:create \
               && bundle exec rails db:migrate \
               && bundle exec rails server --port {{.RAILS_PORT}} -b 0.0.0.0
           '
+    interactive: true
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+    requires:
+      vars: [RAILS_PORT]
+
+  docker:server:open:
+    cmds:
+      - open -na "Google Chrome" --args --new-window --incognito "http://localhost:{{.RAILS_PORT}}"
     requires:
       vars: [RAILS_PORT]
 
   docker:turnip:
     cmds:
-      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'bundle exec rspec --require turnip/rspec spec/features'
+      - |
+        docker compose \
+          -f docker/development/docker-compose.yml \
+          run \
+          --rm \
+          --publish {{.TURNIP_RAILS_PORT}}:{{.TURNIP_RAILS_PORT}} \
+          rails \
+          bash -c '
+            bundle exec rspec --require turnip/rspec spec/features
+          '
+    interactive: true
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
-
-  docker:server:open:
-    cmds:
-      - open -na "Google Chrome" --args --new-window --incognito "http://0.0.0.0:{{.RAILS_PORT}}"
-      - task: docker:server
     requires:
-      vars: [RAILS_PORT]
+      vars: [TURNIP_RAILS_PORT]
 
   ##
   # NOTE: Dev only command.
@@ -116,6 +171,10 @@ tasks:
   install:
     cmds:
       - bundle install
+
+  server:logs:test:
+    cmds:
+      - touch log/test.log && tail -f log/test.log
 
   ##
   # NOTE: Dev only command.
