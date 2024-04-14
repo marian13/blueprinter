@@ -8,13 +8,21 @@ root: .
 on_project_start:
   - task editor:open
   - task docker:start
-  - task github:open
 
 windows:
   - main:
       layout: even-vertical
       root: .
       panes:
-        - RAILS_PORT=8400 task docker:server:open
+        - RAILS_PORT=8400 task docker:server
         - task docker:bash
-        - git status
+        - history -s "task github:open"
+  - turnip:
+      layout: even-vertical
+      root: .
+      panes:
+        - history -s "task docker:chrome:build"
+        - task server:logs:test
+        - history -s "task docker:chrome:logs"
+        - history -s "task docker:chrome:vnc:open"
+        - history -s "task docker:turnip"
