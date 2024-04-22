@@ -84,5 +84,12 @@ end
 #
 group :test do
   gem "turnip", "~> 4.4.0"
+end
+
+##
+# A pretty formatter for Turnip.
+# - https://github.com/gongo/turnip_formatter
+#
+group :test do
   gem "turnip_formatter", "~> 0.8.0"
 end
