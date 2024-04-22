@@ -259,6 +259,10 @@ GEM
     turnip (4.4.0)
       cuke_modeler (~> 3.15)
       rspec (>= 3.0, < 4.0)
+    turnip_formatter (0.8.0)
+      activesupport (>= 4.2.7, < 8.0)
+      rspec (>= 3.3, < 4.0)
+      turnip (~> 4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     web-console (4.2.1)
@@ -299,6 +303,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   turnip (~> 4.4.0)
+  turnip_formatter (~> 0.8.0)
   tzinfo-data
   web-console
 

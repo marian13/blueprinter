@@ -79,4 +79,8 @@ $ rails new blueprinter --database=postgresql
 
 - [RSpec](https://github.com/rspec/rspec-rails).
 
+- [Capybara](https://github.com/teamcapybara/capybara).
+
 - [Turnip](https://github.com/jnicklas/turnip).
+
+- [TurnipFormatter](https://github.com/gongo/turnip_formatter).

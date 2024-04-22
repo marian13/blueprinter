@@ -125,6 +125,16 @@ tasks:
     requires:
       vars: [RAILS_PORT]
 
+  ##
+  # NOTE: RSpec supports multiple formatters.
+  # - https://github.com/rspec/rspec-core/commit/a5f9ffd270ff8d450d9460f14b269b48685c4567
+  #
+  # NOTE: Turnip HTML formatter.
+  # - https://github.com/gongo/turnip_formatter
+  #
+  # TODO: Cucumber-like logs for Turnip.
+  # - https://github.com/jnicklas/turnip?tab=readme-ov-file#rspec-custom-formatters
+  #
   docker:turnip:
     cmds:
       - |
@@ -135,7 +145,13 @@ tasks:
           --publish {{.TURNIP_RAILS_PORT}}:{{.TURNIP_RAILS_PORT}} \
           rails \
           bash -c '
-            bundle exec rspec --require turnip/rspec spec/features
+            bundle exec rspec \
+              --require turnip/rspec \
+              --require turnip_formatter \
+              --format progress \
+              --format RSpecTurnipFormatter \
+              --out tmp/turnip_report.html \
+              spec/features
           '
     interactive: true
     preconditions:
@@ -143,6 +159,10 @@ tasks:
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
     requires:
       vars: [TURNIP_RAILS_PORT]
+
+  docker:turnip:open:
+    cmds:
+      - open tmp/turnip_report.html
 
   ##
   # NOTE: Dev only command.

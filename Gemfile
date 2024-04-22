@@ -84,4 +84,5 @@ end
 #
 group :test do
   gem "turnip", "~> 4.4.0"
+  gem "turnip_formatter", "~> 0.8.0"
 end
