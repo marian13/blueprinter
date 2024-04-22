@@ -49,7 +49,7 @@ tasks:
 
   docker:chrome:http:open:
     cmds:
-      - open http://localhost:{{.CHROME_HTTP_PORT}} %>
+      - open http://localhost:{{.CHROME_HTTP_PORT}}
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -67,7 +67,7 @@ tasks:
 
   docker:chrome:vnc:open:
     cmds:
-      - open vnc://localhost:{{.CHROME_VNC_PORT}} %>
+      - open vnc://localhost:{{.CHROME_VNC_PORT}}
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
