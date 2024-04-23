@@ -53,6 +53,8 @@ jobs:
             && apt-get install --no-install-recommends -y gnupg \
             && apt-get clean \
             && rm -rf /var/lib/apt/lists/*
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Install Task (task runner)
         uses: arduino/setup-task@v1
       - name: Set up Ruby gems
