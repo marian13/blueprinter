@@ -63,5 +63,6 @@ jobs:
         run: task lint:db:schema
         env:
           POSTGRES_HOST: postgres
+          POSTGRES_PASSWORD: password
           POSTGRES_PORT: 5432
           POSTGRES_USERNAME: postgres
