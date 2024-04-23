@@ -93,6 +93,7 @@ jobs:
       - name: Run DbSchemaChecker
         run: task lint:db:schema
         env:
+          PROJECT_NAME: blueprinter
           POSTGRES_HOST: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_PORT: 5432
