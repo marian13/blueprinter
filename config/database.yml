@@ -1,3 +1,8 @@
+##
+# NOTE: Prefer to use `ENV.fetch` to get ENV variables values.
+# - https://ruby-doc.org/core-2.7.1/ENV.html#method-c-fetch
+# - https://github.com/rubocop/rubocop-rails/issues/306
+#
 default: &default
   adapter: postgresql
   encoding: unicode
