@@ -101,3 +101,11 @@ end
 group :test do
   gem "db_schema_checker", "~> 0.2.1"
 end
+
+##
+# Annotate (aka AnnotateModels) - Add a comment summarizing the current schema to the bottom of each of ActiveRecord models, etc.
+# - https://github.com/ctran/annotate_models
+#
+group :development do
+  gem "annotate", "~> 3.2.0"
+end

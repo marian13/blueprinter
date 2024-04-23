@@ -10,6 +10,17 @@ version: '3'
 #
 tasks:
   ##
+  # NOTE: Annotate (aka AnnotateModels) options.
+  # - https://github.com/ctran/annotate_models/blob/develop/lib/annotate/parser.rb
+  #
+  # NOTE: Same as `task lint:annotate`, but without `--frozen` option.
+  # IMPORTANT: Must be kept in sync with `task lint:annotate`.
+  #
+  annotate:
+    cmds:
+      - bundle exec annotate --models --position-in-class=bottom --format=bare --exclude=tests
+
+  ##
   # NOTE: `docker compose run` automatically builds image if is not built yet.
   #
   docker:bash:
@@ -191,6 +202,14 @@ tasks:
   install:
     cmds:
       - bundle install
+
+  ##
+  # NOTE: Same as `task annotate`, but with `--frozen` option for linting.
+  # IMPORTANT: Must be kept in sync with `task annotate`.
+  #
+  lint:annotate:
+    cmds:
+      - bundle exec annotate --models --position-in-class=bottom --format=bare --exclude=tests --frozen
 
   ##
   # Rake task that allows to verify whether schema.rb and migration files have been correctly committed.
