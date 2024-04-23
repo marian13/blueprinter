@@ -90,3 +90,9 @@ $ rails new blueprinter --database=postgresql
 - [GitHub Actions](https://github.com/features/actions).
 
 - [DbSchemaChecker](https://github.com/kufu/db_schema_checker).
+
+- [Annotate (aka AnnotateModels)](https://github.com/ctran/annotate_models).
+
+### Diagrams
+
+- [Rails ERD](https://github.com/voormedia/rails-erd).

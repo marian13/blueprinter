@@ -109,3 +109,11 @@ end
 group :development do
   gem "annotate", "~> 3.2.0"
 end
+
+##
+# Generate Entity-Relationship Diagrams for Rails applications.
+# - https://github.com/voormedia/rails-erd
+#
+group :development do
+  gem "rails-erd", "~> 1.6.1"
+end

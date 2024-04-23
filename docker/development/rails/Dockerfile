@@ -6,6 +6,12 @@
 
 FROM ruby:3.3.0-slim
 
+##
+# NOTE: `graphviz` is required for Rails ERD.
+# - https://github.com/voormedia/rails-erd
+#
+# IMPORTANT: `graphviz` is NOT required by CI.
+#
 RUN apt-get update -qq \
   && apt-get install --no-install-recommends -y git \
   && apt-get install --no-install-recommends -y make \
@@ -14,6 +20,7 @@ RUN apt-get update -qq \
   && apt-get install --no-install-recommends -y curl \
   && apt-get install --no-install-recommends -y libpq-dev \
   && apt-get install --no-install-recommends -y gnupg \
+  && apt-get install --no-install-recommends -y graphviz \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

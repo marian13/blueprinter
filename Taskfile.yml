@@ -192,6 +192,17 @@ tasks:
       - code .
 
   ##
+  # Generate Entity-Relationship Diagrams for Rails applications.
+  # - https://github.com/voormedia/rails-erd
+  #
+  # TODO: Fix `Failed: NoMethodError: undefined method `direct_descendants' for class ActionText::Record`.
+  # - https://github.com/voormedia/rails-erd/issues/377
+  #
+  erd:
+    cmds:
+      - bundle exec erd
+
+  ##
   # NOTE: Dev only command.
   # NOTE: macOS specific command.
   #
