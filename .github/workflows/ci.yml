@@ -1,0 +1,48 @@
+##
+# CI using GitHub Actions.
+#
+# NOTE: GitHub Actions DSL.
+# - https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#understanding-the-workflow-file
+# - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+#
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    ##
+    # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
+    # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
+    # That is why the well-known Ubuntu is used.
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+    #
+    runs-on: ubuntu-20.04
+    name: Lint
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          ##
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
+          # - https://github.com/ruby/setup-ruby#usage
+          # - https://github.com/ruby/setup-ruby#bundler
+          #
+          bundler-cache: true
+      ##
+      # NOTE: Installs Task (task runner).
+      # https://taskfile.dev/installation/#github-actions
+      # https://github.com/go-task/task
+      #
+      - name: Install Task (task runner)
+        uses: arduino/setup-task@v1
+      - name: Run DbSchemaChecker
+        run: task lint:db:schema
