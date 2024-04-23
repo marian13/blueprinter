@@ -192,6 +192,14 @@ tasks:
     cmds:
       - bundle install
 
+  ##
+  # Rake task that allows to verify whether schema.rb and migration files have been correctly committed.
+  # - https://github.com/kufu/db_schema_checker
+  #
+  lint:db:schema:
+    cmds:
+      - RAILS_ENV=test bundle exec rails db:migrate:reset:check
+
   server:logs:test:
     cmds:
       - touch log/test.log && tail -f log/test.log

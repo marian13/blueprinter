@@ -93,3 +93,11 @@ end
 group :test do
   gem "turnip_formatter", "~> 0.8.0"
 end
+
+##
+# Rake task that allows to verify whether schema.rb and migration files have been correctly committed.
+# - https://github.com/kufu/db_schema_checker
+#
+group :test do
+  gem "db_schema_checker", "~> 0.2.1"
+end

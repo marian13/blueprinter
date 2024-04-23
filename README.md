@@ -84,3 +84,9 @@ $ rails new blueprinter --database=postgresql
 - [Turnip](https://github.com/jnicklas/turnip).
 
 - [TurnipFormatter](https://github.com/gongo/turnip_formatter).
+
+### CI
+
+- [GitHub Actions](https://github.com/features/actions).
+
+- [DbSchemaChecker](https://github.com/kufu/db_schema_checker).

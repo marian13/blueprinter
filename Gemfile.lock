@@ -101,6 +101,7 @@ GEM
     cuke_modeler (3.21.0)
       cucumber-gherkin (< 29.0)
     date (3.3.4)
+    db_schema_checker (0.2.1)
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
@@ -290,6 +291,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  db_schema_checker (~> 0.2.1)
   debug
   importmap-rails
   jbuilder
