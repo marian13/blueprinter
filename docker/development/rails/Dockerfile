@@ -12,6 +12,8 @@ FROM ruby:3.3.0-slim
 #
 # IMPORTANT: `graphviz` is NOT required by CI.
 #
+# IMPORTANT: `vim` is NOT required by CI. In is just for developement needs like `EDITOR=vim bundle open gem`.
+#
 RUN apt-get update -qq \
   && apt-get install --no-install-recommends -y git \
   && apt-get install --no-install-recommends -y make \
@@ -21,6 +23,7 @@ RUN apt-get update -qq \
   && apt-get install --no-install-recommends -y libpq-dev \
   && apt-get install --no-install-recommends -y gnupg \
   && apt-get install --no-install-recommends -y graphviz \
+  && apt-get install --no-install-recommends -y vim \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
