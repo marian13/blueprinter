@@ -1,3 +1,9 @@
+##
+# IMPORTANT:
+#   Currently this `Dockerfile` is used only in the local environments (by `docker/development/docker-compose.yml`).
+#   Make sure it is synced with `.github/workflows/ci.yml`.
+##
+
 FROM ruby:3.3.0-slim
 
 RUN apt-get update -qq \

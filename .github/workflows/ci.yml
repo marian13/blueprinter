@@ -21,12 +21,30 @@ jobs:
     # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
     # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
     # That is why the well-known Ubuntu is used.
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+    # - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
     #
     runs-on: ubuntu-20.04
+    ##
+    # NOTE: `FROM ruby:3.3.0-slim` in `docker/development/rails/Dockerfile`.
+    #
+    # NOTE: How to run Docker containers in GitHub Actions?
+    # - https://docs.github.com/en/actions/using-jobs/running-jobs-in-a-container
+    #
+    # NOTE: Docker container was NOT used before. It is added to have a way to work with Postgres.
+    # - https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers#running-jobs-in-containers
+    #
     container: ruby:3.3.0-slim
     name: Lint
 
+    ##
+    # NOTE: How to use Postgres with GitHub Actions?
+    # - https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers#running-jobs-in-containers
+    # - https://stackoverflow.com/questions/57915791/how-to-connect-to-postgres-in-github-actions
+    #
+    # NOTE: Non container Postgres GitHub Action was NOT used since it does NOT allow to set Postgres version.
+    # - https://github.com/ikalnytskyi/action-setup-postgres
+    # - https://github.com/actions/runner-images
+    #
     services:
       postgres:
         image: postgres:13.2
@@ -41,6 +59,9 @@ jobs:
           - 5432:5432
 
     steps:
+      ##
+      # NOTE: `RUN apt-get update -qq ...` in `docker/development/rails/Dockerfile`.
+      #
       - name: Set up packages
         run: |
           apt-get update -qq \
@@ -53,12 +74,22 @@ jobs:
             && apt-get install --no-install-recommends -y gnupg \
             && apt-get clean \
             && rm -rf /var/lib/apt/lists/*
+      ##
+      # NOTE: `COPY . /project` in `docker/development/rails/Dockerfile`.
+      #
+      # NOTE: How to checkout repo from Docker container in GitHub Actions?
+      # - https://github.com/actions/checkout
+      # - https://stackoverflow.com/questions/68578638/how-to-checkout-repo-inside-the-docker-in-github-action
+      #
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Task (task runner)
         uses: arduino/setup-task@v1
       - name: Set up Ruby gems
         run: task install
+      ##
+      # NOTE: Required ENV vars can be found by `services -> rails -> environment` in `docker/development/docker-compose.yml`.
+      #
       - name: Run DbSchemaChecker
         run: task lint:db:schema
         env:
