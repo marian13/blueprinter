@@ -11,11 +11,6 @@ require "spec_helper"
 require "rails_helper"
 
 ##
-# NOTE: Executes initializers.
-#
-Dir.glob("spec/features/support/initializers/**/*.rb") { |file| load file }
-
-##
 # NOTE: Sets up Capybara for usage with RSpec.
 # - https://github.com/teamcapybara/capybara?tab=readme-ov-file#using-capybara-with-rspec
 #
@@ -43,10 +38,25 @@ require "turnip/rspec"
 require "turnip/capybara"
 
 ##
+# NOTE: Load Site Prism sections.
+#
+require_relative "features/support/sections"
+
+##
+# NOTE: Load Site Prism pages.
+#
+require_relative "features/support/pages"
+
+##
 # NOTE: Loads step definitions files. Their names are ending with `steps.rb`.
 # - https://github.com/jnicklas/turnip?tab=readme-ov-file#where-to-place-steps
 #
 Dir.glob("spec/**/*steps.rb") { |file| load(file, true) }
+
+##
+# NOTE: Executes initializers.
+#
+require_relative "features/support/initializers"
 
 RSpec.configure do |config|
   ##

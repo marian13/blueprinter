@@ -252,6 +252,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    site_prism (5.0.1)
+      addressable (~> 2.8, >= 2.8.1)
+      capybara (~> 3.31)
+      site_prism-all_there (> 2, < 5)
+    site_prism-all_there (3.0.4)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -314,6 +319,7 @@ DEPENDENCIES
   redis (>= 4.0.1)
   rspec-rails (~> 6.1.0)
   selenium-webdriver
+  site_prism (~> 5.0.1)
   sprockets-rails
   stimulus-rails
   turbo-rails

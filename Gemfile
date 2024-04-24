@@ -117,3 +117,11 @@ end
 group :development do
   gem "rails-erd", "~> 1.6.1"
 end
+
+##
+# SitePrism - A Page Object Model DSL for Capybara.
+# - https://github.com/site-prism/site_prism
+#
+group :test do
+  gem "site_prism", "~> 5.0.1"
+end
