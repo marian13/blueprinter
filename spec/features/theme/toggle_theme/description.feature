@@ -7,14 +7,14 @@ Feature: Toggle theme
     Given a user
     When the user opens the app
     And the light theme is selected
-    When the user clicks on the toggle theme button
+    When the user clicks on the Toggle Theme button
     Then the theme is switched to the dark theme
 
   Example: User toggles from dart to light theme
     Given a user
     When the user opens the app
     And the dark theme is selected
-    When the user clicks on the toggle theme button
+    When the user clicks on the Toggle Theme button
     Then the theme is switched to the light theme
 
 

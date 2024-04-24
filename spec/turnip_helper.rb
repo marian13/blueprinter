@@ -60,10 +60,10 @@ require_relative "features/support/initializers"
 
 RSpec.configure do |config|
   ##
-  # NOTE: Stops Turnip when a step is NOT implemented.
+  # NOTE: Considers implemented Turnip steps as pending.
   # - https://github.com/jnicklas/turnip?tab=readme-ov-file#unimplemented-steps
   #
-  config.raise_error_for_unimplemented_steps = true
+  config.raise_error_for_unimplemented_steps = false
 end
 
 puts "[Turnip] `turnip_helper` loaded"

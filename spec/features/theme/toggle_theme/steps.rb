@@ -43,7 +43,7 @@ steps_for :"features/theme/toggle_theme" do
     expect(@home_page).to have_dark_theme
   end
 
-  step "the user clicks on the toggle theme button" do
+  step "the user clicks on the Toggle Theme button" do
     @home_page.header.theme_toggle.click
   end
 
