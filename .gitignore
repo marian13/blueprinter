@@ -45,3 +45,8 @@
 #
 TODO.md
 TODO
+
+##
+# NOTE: Ignores `.byebug_history`.
+#
+.byebug_history
