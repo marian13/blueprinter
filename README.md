@@ -87,6 +87,18 @@ $ rails new blueprinter --database=postgresql
 
 - [TurnipFormatter](https://github.com/gongo/turnip_formatter).
 
+### Debugging
+
+- [Byebug](https://github.com/deivid-rodriguez/byebug).
+
+- [Byebug syntax highlighting](https://gist.github.com/marian13/5dade20a431d7254db30e543167058ce).
+
+- [IRB](https://github.com/ruby/irb).
+
+- [debug.rb](https://github.com/ruby/debug).
+
+- [Pry](https://github.com/pry/pry).
+
 ### CI
 
 - [GitHub Actions](https://github.com/features/actions).
@@ -95,6 +107,6 @@ $ rails new blueprinter --database=postgresql
 
 - [Annotate (aka AnnotateModels)](https://github.com/ctran/annotate_models).
 
-### Diagrams
+### Documenting
 
 - [Rails ERD](https://github.com/voormedia/rails-erd).
