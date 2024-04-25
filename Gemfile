@@ -125,3 +125,11 @@ end
 group :test do
   gem "site_prism", "~> 5.0.1"
 end
+
+##
+# Byebug is a simple to use and feature rich debugger for Ruby.
+# - https://github.com/deivid-rodriguez/byebug
+#
+group :development, :test do
+  gem "byebug", "~> 11.1.3"
+end
