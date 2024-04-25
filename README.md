@@ -1,5 +1,11 @@
 # Blueprinter
 
+## Quick Links
+
+| Description | Link |
+| - | - |
+| Local Blueprinter app | [http://localhost:8400](http://localhost:8400) |
+
 ## Development
 
 ### Prerequisites
