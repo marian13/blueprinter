@@ -3,7 +3,7 @@ return if (defined? Rails) && !(Rails.env.development? || Rails.env.test?)
 require 'tempfile'
 
 require 'byebug'
-# require 'rouge'
+require 'rouge'
 
 ##
 # Yet another hack how to enable the syntax highlighting for the byebug gem. Works for v10.0.0 and higher.
