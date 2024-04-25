@@ -240,3 +240,10 @@ tasks:
   tmuxinator:start:
     cmds:
       - direnv exec . tmuxinator start blueprinter --project-config=.dev/.tmuxinator.yml
+
+  ##
+  # NOTE: Dev only command.
+  #
+  tmuxinator:stop:
+    cmds:
+      - direnv exec . tmuxinator stop blueprinter --project-config=.dev/.tmuxinator.yml

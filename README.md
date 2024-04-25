@@ -44,6 +44,8 @@ This will start the project for you.
 
 Have a look at [.dev/tmuxinator.yml](https://github.com/marian13/blueprinter/blob/main/.dev/.tmuxinator.yml) if you are interested in what is happening under the hood.
 
+Once you finish development, use `task tmuxinator:stop` to turn off the environment.
+
 ## FAQ
 
 ### What was the Rails new command?
