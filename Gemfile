@@ -133,3 +133,11 @@ end
 group :development, :test do
   gem "byebug", "~> 11.1.3"
 end
+
+##
+# Pry is a runtime developer console and IRB alternative with powerful introspection capabilities.
+# - https://github.com/pry/pry
+#
+group :development, :test do
+  gem "pry", "~> 0.14.2"
+end
