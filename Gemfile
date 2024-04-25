@@ -141,3 +141,27 @@ end
 group :development, :test do
   gem "pry", "~> 0.14.2"
 end
+
+##
+# Pretty print your Ruby objects with colors.
+# - https://github.com/amazing-print/amazing_print
+#
+group :development, :test do
+  gem "amazing_print", "~> 1.6.0"
+end
+
+##
+# Ruby gem for ANSI terminal colors.
+# - https://github.com/janlelis/paint
+#
+group :development, :test do
+  gem "paint", "~> 2.3.0"
+end
+
+##
+# Rouge is a pure Ruby syntax highlighter.
+# - https://github.com/rouge-ruby/rouge
+#
+group :development, :test do
+  gem "rouge", "~> 4.2.1"
+end

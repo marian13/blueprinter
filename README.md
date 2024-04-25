@@ -69,13 +69,7 @@ Rails 7.1.3.2
 $ rails new blueprinter --database=postgresql
 ```
 
-## Contributing
-
-### Conventions
-
-- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0).
-
-## Stack
+## Tech Stack
 
 ### Tests
 
@@ -99,6 +93,12 @@ $ rails new blueprinter --database=postgresql
 
 - [Pry](https://github.com/pry/pry).
 
+- [Amazing Print](https://github.com/amazing-print/amazing_print).
+
+- [Paint](https://github.com/janlelis/paint).
+
+- [Rouge](https://github.com/rouge-ruby/rouge).
+
 ### CI
 
 - [GitHub Actions](https://github.com/features/actions).
@@ -110,3 +110,9 @@ $ rails new blueprinter --database=postgresql
 ### Documenting
 
 - [Rails ERD](https://github.com/voormedia/rails-erd).
+
+## Contributing
+
+### Conventions
+
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0).
