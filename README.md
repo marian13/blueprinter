@@ -77,6 +77,12 @@ $ rails new blueprinter --database=postgresql
 
 ## Tech Stack
 
+### Frontend
+
+- [Turbo](https://github.com/hotwired/turbo-rails).
+
+- [Stimulus](https://github.com/hotwired/stimulus).
+
 ### Tests
 
 - [RSpec](https://github.com/rspec/rspec-rails).
