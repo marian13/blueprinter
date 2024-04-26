@@ -81,6 +81,10 @@ $ rails new blueprinter --database=postgresql
 
 - [Rails](https://github.com/rails/rails).
 
+#### I18n
+
+- [Ruby I18n](https://github.com/ruby-i18n/i18n).
+
 ### Frontend
 
 - [Turbo](https://github.com/hotwired/turbo-rails).
