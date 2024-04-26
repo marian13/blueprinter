@@ -1,0 +1,2 @@
+function includeKeys(e,r){const t={};if(Array.isArray(r))for(const n of r){const r=Object.getOwnPropertyDescriptor(e,n);r?.enumerable&&Object.defineProperty(t,n,r)}else for(const n of Reflect.ownKeys(e)){const c=Object.getOwnPropertyDescriptor(e,n);if(c.enumerable){const o=e[n];r(n,o,e)&&Object.defineProperty(t,n,c)}}return t}function excludeKeys(e,r){if(Array.isArray(r)){const t=new Set(r);return includeKeys(e,(e=>!t.has(e)))}return includeKeys(e,((e,t,n)=>!r(e,t,n)))}export{excludeKeys,includeKeys};
+
