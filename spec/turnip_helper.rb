@@ -38,6 +38,11 @@ require "turnip/rspec"
 require "turnip/capybara"
 
 ##
+# NOTE: Executes initializers.
+#
+require_relative "features/support/initializers"
+
+##
 # NOTE: Load Site Prism sections.
 #
 require_relative "features/support/sections"
@@ -48,15 +53,20 @@ require_relative "features/support/sections"
 require_relative "features/support/pages"
 
 ##
-# NOTE: Loads step definitions files. Their names are ending with `steps.rb`.
-# - https://github.com/jnicklas/turnip?tab=readme-ov-file#where-to-place-steps
+# NOTE: Load Site Prism pages.
 #
-Dir.glob("spec/**/*steps.rb") { |file| load(file, true) }
+require_relative "features/support/pages"
 
 ##
-# NOTE: Executes initializers.
+# NOTE: Load global step.
 #
-require_relative "features/support/initializers"
+require_relative "features/support/steps"
+
+##
+# NOTE: Loads feature-specific step definitions files. Their names are ending with `steps.rb`.
+# - https://github.com/jnicklas/turnip?tab=readme-ov-file#where-to-place-steps
+#
+Dir.glob("spec/features/**/*steps.rb") { |file| load(file, true) }
 
 RSpec.configure do |config|
   ##
