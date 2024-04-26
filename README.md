@@ -87,13 +87,17 @@ $ rails new blueprinter --database=postgresql
 
 - [Stimulus](https://github.com/hotwired/stimulus).
 
-#### Utilities
+#### CSS toolkits
 
-- [Lodash](https://github.com/lodash/lodash).
+- [Pico](https://github.com/picocss/pico).
 
 #### Query Params
 
 - [query-string](https://github.com/sindresorhus/query-string).
+
+#### Utilities
+
+- [Lodash](https://github.com/lodash/lodash).
 
 ### Tests
 

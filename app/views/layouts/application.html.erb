@@ -11,18 +11,18 @@
     <%= csp_meta_tag %>
 
     <!--
-      NOTE: Pico - Classless CSS framework.S
+      NOTE: Pico - CSS framework (Initially classless version was used, but is too limited in features).
       - https://picocss.com/docs#usage-from-cdn
       - https://x4qtf8.csb.app
     -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.pink.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.pink.min.css" />
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <header>
+    <header class="container">
       <nav>
         <ul>
           <li><strong>Blueprinter</strong></li>
@@ -39,12 +39,48 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-sun"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 19a1 1 0 0 1 .993 .883l.007 .117v1a1 1 0 0 1 -1.993 .117l-.007 -.117v-1a1 1 0 0 1 1 -1z" /><path d="M18.313 16.91l.094 .083l.7 .7a1 1 0 0 1 -1.32 1.497l-.094 -.083l-.7 -.7a1 1 0 0 1 1.218 -1.567l.102 .07z" /><path d="M7.007 16.993a1 1 0 0 1 .083 1.32l-.083 .094l-.7 .7a1 1 0 0 1 -1.497 -1.32l.083 -.094l.7 -.7a1 1 0 0 1 1.414 0z" /><path d="M4 11a1 1 0 0 1 .117 1.993l-.117 .007h-1a1 1 0 0 1 -.117 -1.993l.117 -.007h1z" /><path d="M21 11a1 1 0 0 1 .117 1.993l-.117 .007h-1a1 1 0 0 1 -.117 -1.993l.117 -.007h1z" /><path d="M6.213 4.81l.094 .083l.7 .7a1 1 0 0 1 -1.32 1.497l-.094 -.083l-.7 -.7a1 1 0 0 1 1.217 -1.567l.102 .07z" /><path d="M19.107 4.893a1 1 0 0 1 .083 1.32l-.083 .094l-.7 .7a1 1 0 0 1 -1.497 -1.32l.083 -.094l.7 -.7a1 1 0 0 1 1.414 0z" /><path d="M12 2a1 1 0 0 1 .993 .883l.007 .117v1a1 1 0 0 1 -1.993 .117l-.007 -.117v-1a1 1 0 0 1 1 -1z" /><path d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z" /></svg>
             </a>
           <li>
+          <li data-controller="language-selection">
+            <!--
+              NOTE: Language icon from Tabler.
+              - https://tabler.io/icons/icon/language
+            -->
+            <a data-action="click->language-selection#open" data-theme-target="icon" aria-label="Open language selection">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-language"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7" /><path d="M9 3v2c0 4.418 -2.239 8 -5 8" /><path d="M5 9c0 2.144 2.952 3.908 6.7 4" /><path d="M12 20l4 -9l4 9" /><path d="M19.1 18h-6.2" /></svg>
+            </a>
+
+            <!--
+              NOTE: How to create modals usign Pico?
+              - https://picocss.com/docs/modal
+            -->
+            <dialog data-language-selection-target="modal">
+              <article>
+                <h2>Select Language</h2>
+                <fieldset>
+                  <label>
+                    <!-- TODO: Application Presenter -->
+                    <input data-language-selection-target="englishOption" type="radio" name="language" <%= "checked" if params[:locale].in?([nil, "en"]) %> value="en"/>
+                    English
+                  </label>
+                  <label>
+                    <input data-language-selection-target="ukrainianOption" type="radio" name="language" <%= "checked" if params[:locale] == "ua" %> value="ua" />
+                    Ukrainian
+                  </label>
+                </fieldset>
+                <footer class="container">
+                  <button data-action="click->language-selection#cancel" class="secondary">
+                    Cancel
+                  </button>
+                  <button data-action="click->language-selection#confirm">Confirm</button>
+                </footer>
+              </article>
+            </dialog>
+          </li>
        </li>
         </ul>
       </nav>
     </header>
 
-    <main>
+    <main class="container">
       <%= yield %>
     </main>
   </body>
