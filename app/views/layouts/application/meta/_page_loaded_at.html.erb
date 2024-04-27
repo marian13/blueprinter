@@ -1,0 +1,7 @@
+<!--
+  Stores time when page is loaded. Useful for tracking page reloads.
+
+  NOTE: Intentionally uses custom meta tag.
+  - https://stackoverflow.com/a/10534167/12201472.
+-->
+<meta data-test-id="page_loaded_at" data-key="page-loaded-at" data-value="<%= Time.now.utc.iso8601 %>" />
