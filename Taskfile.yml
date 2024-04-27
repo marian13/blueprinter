@@ -92,6 +92,13 @@ tasks:
     requires:
       vars: [HOST_OS_CHROME_VNC_PORT]
 
+  docker:down:
+    cmds:
+      - docker-compose -f docker/development/docker-compose.yml down
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   ##
   # NOTE: Importmap for Rails.
   # - https://github.com/rails/importmap-rails?tab=readme-ov-file#using-npm-packages-via-javascript-cdns

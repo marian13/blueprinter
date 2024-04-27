@@ -9,6 +9,9 @@ on_project_start:
   - task editor:open
   - task docker:start
 
+on_project_stop:
+  - task docker:down
+
 windows:
   - main:
       layout: even-vertical
