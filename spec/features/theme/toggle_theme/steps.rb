@@ -32,19 +32,19 @@ steps_for :"features/theme/toggle_theme" do
   # - https://github.com/site-prism/site_prism?tab=readme-ov-file#testing-for-the-existence-of-the-element
   #
   step "the light theme is selected" do
-    @home_page.header.theme_toggle.click unless @home_page.has_light_theme?
+    @home_page.header.toggle_theme_button.click unless @home_page.has_light_theme?
 
     expect(@home_page).to have_light_theme
   end
 
   step "the dark theme is selected" do
-    @home_page.header.theme_toggle.click unless @home_page.has_dark_theme?
+    @home_page.header.toggle_theme_button.click unless @home_page.has_dark_theme?
 
     expect(@home_page).to have_dark_theme
   end
 
   step "the user clicks on the Toggle Theme button" do
-    @home_page.header.theme_toggle.click
+    @home_page.header.toggle_theme_button.click
   end
 
   step "the theme is switched to the dark theme" do
