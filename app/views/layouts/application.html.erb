@@ -47,40 +47,8 @@
             </a>
           <li>
           <li data-controller="language-selection">
-            <!--
-              NOTE: Language icon from Tabler.
-              - https://tabler.io/icons/icon/language
-            -->
-            <a data-action="click->language-selection#open" data-theme-target="icon" aria-label="Open language selection">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-language"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7" /><path d="M9 3v2c0 4.418 -2.239 8 -5 8" /><path d="M5 9c0 2.144 2.952 3.908 6.7 4" /><path d="M12 20l4 -9l4 9" /><path d="M19.1 18h-6.2" /></svg>
-            </a>
-
-            <!--
-              NOTE: How to create modals usign Pico?
-              - https://picocss.com/docs/modal
-            -->
-            <dialog data-language-selection-target="modal">
-              <article>
-                <h2>Select Language</h2>
-                <fieldset>
-                  <label>
-                    <!-- TODO: Application Presenter -->
-                    <input data-language-selection-target="englishOption" type="radio" name="language" <%= "checked" if params[:locale].in?([nil, "en"]) %> value="en"/>
-                    English
-                  </label>
-                  <label>
-                    <input data-language-selection-target="ukrainianOption" type="radio" name="language" <%= "checked" if params[:locale] == "ua" %> value="ua" />
-                    Ukrainian
-                  </label>
-                </fieldset>
-                <footer class="container">
-                  <button data-action="click->language-selection#cancel" class="secondary">
-                    Cancel
-                  </button>
-                  <button data-action="click->language-selection#confirm">Confirm</button>
-                </footer>
-              </article>
-            </dialog>
+            <%= render partial: "layouts/application/header/nav/open_language_selection_modal" %>
+            <%= render partial: "layouts/application/header/nav/language_selection_modal" %>
           </li>
        </li>
         </ul>

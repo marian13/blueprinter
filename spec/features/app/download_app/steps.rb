@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 steps_for :"features/app/download" do
+  ##
+  # NOTE: Do nothing intentionally.
+  #
   step "a user" do
     ##
     # NOTE: Use `skip` to mark features/steps as pending.

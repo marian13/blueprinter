@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 steps_for :"features/github/open_repo" do
+  ##
+  # NOTE: Do nothing intentionally.
+  #
   step "a user" do
   end
 

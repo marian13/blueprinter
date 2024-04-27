@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 steps_for :"features/language/select_language" do
+  ##
+  # NOTE: Do nothing intentionally.
+  #
   step "a user" do
     skip
   end

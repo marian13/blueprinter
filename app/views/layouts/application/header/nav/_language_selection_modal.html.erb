@@ -1,0 +1,26 @@
+<!--
+  NOTE: How to create modals usign Pico?
+  - https://picocss.com/docs/modal
+-->
+<dialog data-language-selection-target="modal">
+  <article>
+    <h2>Select Language</h2>
+    <fieldset>
+      <label>
+        <!-- TODO: Application Presenter or View Component -->
+        <input data-language-selection-target="englishOption" type="radio" name="language" <%= "checked" if params[:locale].in?([nil, "en"]) %> value="en"/>
+        English
+      </label>
+      <label>
+        <input data-language-selection-target="ukrainianOption" type="radio" name="language" <%= "checked" if params[:locale] == "ua" %> value="ua" />
+        Ukrainian
+      </label>
+    </fieldset>
+    <footer class="container">
+      <button data-action="click->language-selection#cancel" class="secondary">
+        Cancel
+      </button>
+      <button data-action="click->language-selection#confirm">Confirm</button>
+    </footer>
+  </article>
+</dialog>

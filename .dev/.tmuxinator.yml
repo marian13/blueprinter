@@ -23,6 +23,6 @@ windows:
       panes:
         - history -s "task docker:chrome:build"
         - history -s "task docker:chrome:logs"
-        - task server:logs:test
         - history -s "task docker:chrome:vnc:open"
+        - task server:logs:test
         - history -s "task docker:turnip"
