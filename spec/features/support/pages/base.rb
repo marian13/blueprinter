@@ -2,6 +2,9 @@
 
 module Pages
   class Base < ::SitePrism::Page
+    section :meta, ::Sections::Meta, "html"
+    section :language_selection_modal, ::Sections::LanguageSelectionModal, %{[data-test-id="language_selection_modal"]}
+
     #
     # NOTE: How to query data attribute using CSS selectors?
     # - https://css-tricks.com/almanac/selectors/a/attribute

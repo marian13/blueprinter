@@ -70,10 +70,10 @@ Dir.glob("spec/features/**/*steps.rb") { |file| load(file, true) }
 
 RSpec.configure do |config|
   ##
-  # NOTE: Considers implemented Turnip steps as pending.
+  # NOTE: Considers implemented Turnip steps as exceptions.
   # - https://github.com/jnicklas/turnip?tab=readme-ov-file#unimplemented-steps
   #
-  config.raise_error_for_unimplemented_steps = false
+  config.raise_error_for_unimplemented_steps = true
 end
 
 puts "[Turnip] `turnip_helper` loaded"
