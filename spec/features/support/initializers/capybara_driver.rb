@@ -41,9 +41,10 @@ Capybara.register_driver :docker_selenium_chrome do |app|
     browser: :remote,
 
     ##
-    # NOTE: Driver connects directly to container, this is why port is hardcoded.
+    # NOTE: Driver connects directly to container.
+    # See `services` -> `chrome` in `docker-compose.yml`.
     #
-    url: "http://chrome:4444/wd/hub",
+    url: %{http://#{ENV.fetch("CHROME_HOST")}:#{ENV.fetch("CHROME_PORT")}/wd/hub},
     options: options
   )
 
