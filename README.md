@@ -103,9 +103,15 @@ $ rails new blueprinter --database=postgresql
 
 - [Lodash](https://github.com/lodash/lodash).
 
+#### Databases
+
+- [Postgres](https://github.com/postgres/postgres).
+
 ### Tests
 
 - [RSpec](https://github.com/rspec/rspec-rails).
+
+- [Selenium](https://github.com/SeleniumHQ/selenium/wiki/Ruby-Bindings).
 
 - [Capybara](https://github.com/teamcapybara/capybara).
 
@@ -131,9 +137,7 @@ $ rails new blueprinter --database=postgresql
 
 - [Rouge](https://github.com/rouge-ruby/rouge).
 
-### CI
-
-- [GitHub Actions](https://github.com/features/actions).
+### Linting
 
 - [DbSchemaChecker](https://github.com/kufu/db_schema_checker).
 
@@ -142,6 +146,18 @@ $ rails new blueprinter --database=postgresql
 ### Documenting
 
 - [Rails ERD](https://github.com/voormedia/rails-erd).
+
+### Containerization
+
+- [Ruby](https://github.com/docker-library/ruby).
+
+- [Postgres](https://github.com/docker-library/postgres).
+
+- [Selenium with Chrome](https://github.com/SeleniumHQ/docker-selenium).
+
+### CI
+
+- [GitHub Actions](https://github.com/features/actions).
 
 ## Contributing
 
