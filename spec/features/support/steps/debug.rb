@@ -2,9 +2,11 @@
 
 step "I debug" do
   byebug
+  byebug
 end
 
 step "I debug with byebug" do
+  byebug
   byebug
 end
 
