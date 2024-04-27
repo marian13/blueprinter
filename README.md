@@ -119,6 +119,8 @@ $ rails new blueprinter --database=postgresql
 
 - [TurnipFormatter](https://github.com/gongo/turnip_formatter).
 
+- [SuperDiff](https://github.com/mcmire/super_diff).
+
 ### Debugging
 
 - [Byebug](https://github.com/deivid-rodriguez/byebug).

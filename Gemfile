@@ -165,3 +165,11 @@ end
 group :development, :test do
   gem "rouge", "~> 4.2.1"
 end
+
+##
+# SuperDiff - A more helpful way to view differences between complex data structures in RSpec.
+# - https://github.com/mcmire/super_diff
+#
+group :test do
+  gem "super_diff", "~> 0.12.1"
+end
