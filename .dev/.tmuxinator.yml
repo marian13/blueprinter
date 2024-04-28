@@ -20,6 +20,11 @@ windows:
         - RAILS_PORT=8400 task docker:server
         - task docker:bash
         - history -s "task github:open"
+  - rspec:
+      layout: even-vertical
+      root: .
+      panes:
+        - history -s "task docker:rspec"
   - turnip:
       layout: even-vertical
       root: .

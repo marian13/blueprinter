@@ -112,7 +112,7 @@ tasks:
 
   docker:rspec:
     cmds:
-      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'bundle exec rspec'
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task rspec'
     interactive: true
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
@@ -228,7 +228,8 @@ tasks:
         bundle exec rspec \
           --require rails_helper \
           --format progress \
-          --exclude-pattern "./spec/features/**/*"
+          --exclude-pattern "./spec/features/**/*" \
+          spec
 
   server:logs:test:
     cmds:
