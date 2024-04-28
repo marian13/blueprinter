@@ -197,6 +197,12 @@ jobs:
         run: task install
       - name: Set up test Postgres
         run: task db:reset:test
+        env:
+          PROJECT_NAME: blueprinter
+          POSTGRES_HOST: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_PORT: 5432
+          POSTGRES_USERNAME: postgres
       ##
       # NOTE: Required ENV vars can be found by `services -> rails -> environment` in `docker/development/docker-compose.yml`.
       #
