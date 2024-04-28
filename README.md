@@ -166,3 +166,7 @@ $ rails new blueprinter --database=postgresql
 ### Conventions
 
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0).
+
+### Must Reads
+
+- [Write Reliable, Asynchronous Integration Tests With Capybara](https://thoughtbot.com/blog/write-reliable-asynchronous-integration-tests-with-capybara#summary).
