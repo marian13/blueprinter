@@ -1,5 +1,7 @@
 # Blueprinter
 
+An app to generate apps.
+
 ## Quick Links
 
 | Description | Link |
