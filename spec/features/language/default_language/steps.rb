@@ -8,12 +8,10 @@ steps_for :"features/language/default_language" do
   end
 
   step "the user opens the app" do
-    @home_page = Pages::Home.new
-
-    @home_page.load
+    app.home_page.load
   end
 
   step "the English language is selected by default" do
-    expect(@home_page.generate_app_button.text).to eq("Generate App")
+    expect(app.home_page.generate_app_button.text).to eq("Generate App")
   end
 end

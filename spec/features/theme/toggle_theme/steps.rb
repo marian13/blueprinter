@@ -19,9 +19,7 @@ steps_for :"features/theme/toggle_theme" do
   # - https://github.com/site-prism/site_prism?tab=readme-ov-file#navigating-to-a-page
   #
   step "the user opens the app" do
-    @home_page = Pages::Home.new
-
-    @home_page.load
+    app.home_page.load
   end
 
   ##
@@ -32,26 +30,26 @@ steps_for :"features/theme/toggle_theme" do
   # - https://github.com/site-prism/site_prism?tab=readme-ov-file#testing-for-the-existence-of-the-element
   #
   step "the light theme is selected" do
-    @home_page.header.toggle_theme_button.click unless @home_page.has_light_theme?
+    app.home_page.header.toggle_theme_button.click unless app.home_page.has_light_theme?
 
-    expect(@home_page).to have_light_theme
+    expect(app.home_page).to have_light_theme
   end
 
   step "the dark theme is selected" do
-    @home_page.header.toggle_theme_button.click unless @home_page.has_dark_theme?
+    app.home_page.header.toggle_theme_button.click unless app.home_page.has_dark_theme?
 
-    expect(@home_page).to have_dark_theme
+    expect(app.home_page).to have_dark_theme
   end
 
   step "the user clicks on the Toggle Theme button" do
-    @home_page.header.toggle_theme_button.click
+    app.home_page.header.toggle_theme_button.click
   end
 
   step "the theme is switched to the dark theme" do
-    expect(@home_page).to have_dark_theme
+    expect(app.home_page).to have_dark_theme
   end
 
   step "the theme is switched to the light theme" do
-    expect(@home_page).to have_light_theme
+    expect(app.home_page).to have_light_theme
   end
 end

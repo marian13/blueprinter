@@ -8,13 +8,11 @@ steps_for :"features/github/open_repo" do
   end
 
   step "the user opens the app" do
-    @home_page = Pages::Home.new
-
-    @home_page.load
+    app.home_page.load
   end
 
   step "the user clicks the Open GitHub Repo link" do
-    @home_page.header.open_github_repo_link.click
+    app.home_page.header.open_github_repo_link.click
   end
 
   ##
