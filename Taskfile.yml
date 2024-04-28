@@ -222,6 +222,14 @@ tasks:
     cmds:
       - RAILS_ENV=test bundle exec rails db:migrate:reset:check
 
+  rspec:
+    cmds:
+      - |
+        bundle exec rspec \
+          --require rails_helper \
+          --format progress \
+          --exclude-pattern "./spec/features/**/*"
+
   server:logs:test:
     cmds:
       - touch log/test.log && tail -f log/test.log

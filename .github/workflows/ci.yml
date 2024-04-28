@@ -206,6 +206,17 @@ jobs:
       ##
       # NOTE: Required ENV vars can be found by `services -> rails -> environment` in `docker/development/docker-compose.yml`.
       #
+      - name: Run RSpec
+        run: task rspec
+        env:
+          PROJECT_NAME: blueprinter
+          POSTGRES_HOST: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_PORT: 5432
+          POSTGRES_USERNAME: postgres
+      ##
+      # NOTE: Required ENV vars can be found by `services -> rails -> environment` in `docker/development/docker-compose.yml`.
+      #
       - name: Run Turnip
         run: task turnip
         env:
