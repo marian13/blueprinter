@@ -13,7 +13,8 @@ steps_for :"features/language/select_language" do
 
     @home_page.load
 
-    @previous_page_loaded_at = @home_page.meta.page_loaded_at
+    @previous_page_loaded_at_value = @home_page.meta.page_loaded_at_value
+    @previous_language_value = @home_page.current_language_value
   end
 
   step "the user clicks on the Open Language Selection Modal button" do
@@ -21,11 +22,11 @@ steps_for :"features/language/select_language" do
   end
 
   step "the user selects the English Language option" do
-    @home_page.language_selection_modal.english_option
+    @home_page.language_selection_modal.english_option.click
   end
 
   step "the user selects the Ukrainian Language option" do
-    @home_page.language_selection_modal.ukrainian_option
+    @home_page.language_selection_modal.ukrainian_option.click
   end
 
   step "the user clicks the Confirm Language Selection button" do
@@ -37,26 +38,26 @@ steps_for :"features/language/select_language" do
   end
 
   step "the current page is reloaded" do
-    expect(@home_page.meta.page_loaded_at).not_to eq(@previous_page_loaded_at)
+    expect(@home_page.meta.page_loaded_at).not_to match_selector(%{[data-value="#{@previous_page_loaded_at_value}"]})
   end
 
   step "the current page is NOT reloaded" do
-    expect(@home_page.meta.page_loaded_at).to eq(@previous_page_loaded_at)
+    expect(@home_page.meta.page_loaded_at).to match_selector(%{[data-value="#{@previous_page_loaded_at_value}"]})
   end
 
   step "the language is switched to the English language" do
-    expect(@home_page.generate_app_button.text).to eq("Generate App")
+    expect(@home_page.generate_app_button).to have_content("Generate App")
   end
 
   step "the language is switched to the Ukrainian language" do
-    expect(@home_page.generate_app_button.text).to eq("Згенерувати Застосунок")
+    expect(@home_page.generate_app_button).to have_content("Згенерувати Застосунок")
   end
 
   step "the language selection modal is closed" do
-
+    expect(@home_page).not_to have_language_selection_modal
   end
 
   step "the language is NOT switched" do
-
+    expect(@home_page.current_language).to match_selector(%{[lang="#{@previous_language_value}"]})
   end
 end

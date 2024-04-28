@@ -2,14 +2,14 @@
 
 module Sections
   class Meta < ::Sections::Base
-    element :page_loaded_at_container, %{[data-test-id="page_loaded_at"]}, visible: false
-
     ##
-    # NOTE: How to get attribute value?s
+    # NOTE: How to get attribute values?
     # - https://stackoverflow.com/questions/25311852/getting-value-from-data-value-attribute-in-capybara
     #
-    def page_loaded_at
-      page_loaded_at_container["data-value"]
+    element :page_loaded_at, %{[data-test-id="page_loaded_at"]}, visible: false
+
+    def page_loaded_at_value
+      page_loaded_at["data-value"]
     end
   end
 end
