@@ -26,7 +26,10 @@ pin "split-on-first" # @3.0.0
 
 pin "lodash" # @4.17.21
 
-pin "axios" # @1.6.8
-pin "#lib/adapters/http.js", to: "#lib--adapters--http.js.js" # @2.0.1
-pin "#lib/platform/node/classes/FormData.js", to: "#lib--platform--node--classes--FormData.js.js" # @2.0.1
-pin "#lib/platform/node/index.js", to: "#lib--platform--node--index.js.js" # @2.0.1
+##
+# NOTE: `axios` does NOT work with importmap for now.
+# - https://github.com/axios/axios/issues/5495
+# - https://github.com/axios/axios/issues/5201
+# - https://generator.jspm.io/#U2NiYGBkDM0rySzJSU1hSKzIzC92MNQz0zMHAKMi6gwaAA
+##
+

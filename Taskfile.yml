@@ -105,7 +105,18 @@ tasks:
   #
   docker:importmap:pin:
     cmds:
-      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'NPM_PACKAGE={{.NPM_PACKAGE}} task importmap:pin'
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task importmap:pin -- {{.CLI_ARGS}}'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  ##
+  # NOTE: Importmap for Rails.
+  # - https://github.com/rails/importmap-rails?tab=readme-ov-file#using-npm-packages-via-javascript-cdns
+  #
+  docker:importmap:unpin:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task importmap:unpin -- {{.CLI_ARGS}}'
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -206,11 +217,25 @@ tasks:
   # NOTE: Importmap for Rails.
   # - https://github.com/rails/importmap-rails?tab=readme-ov-file#using-npm-packages-via-javascript-cdns
   #
+  # NOTE: Examples.
+  #   task importmap:pin -- axios
+  #   task importmap:pin -- axios --from=jsdelivr
+  #
   importmap:pin:
     cmds:
-      - ./bin/importmap pin {{.NPM_PACKAGE}}
-    requires:
-      vars: [NPM_PACKAGE]
+      - ./bin/importmap pin {{.CLI_ARGS}}
+
+  ##
+  # NOTE: Importmap for Rails.
+  # - https://github.com/rails/importmap-rails?tab=readme-ov-file#using-npm-packages-via-javascript-cdns
+  #
+  # NOTE: Examples.
+  #   task importmap:unpin -- axios
+  #   task importmap:unpin -- axios --from=jsdelivr
+  #
+  importmap:unpin:
+    cmds:
+      - ./bin/importmap unpin {{.CLI_ARGS}}
 
   install:
     cmds:
