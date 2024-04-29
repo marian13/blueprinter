@@ -97,6 +97,10 @@ $ rails new blueprinter --database=postgresql
 
 - [Pico](https://github.com/picocss/pico).
 
+#### HTTP Requests
+
+- [Axios](https://github.com/axios/axios).
+
 #### Query Params
 
 - [query-string](https://github.com/sindresorhus/query-string).
@@ -105,7 +109,7 @@ $ rails new blueprinter --database=postgresql
 
 - [Lodash](https://github.com/lodash/lodash).
 
-#### Databases
+### Databases
 
 - [Postgres](https://github.com/postgres/postgres).
 
