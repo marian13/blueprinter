@@ -177,6 +177,6 @@ $ rails new blueprinter --database=postgresql
 
 - [Write Reliable, Asynchronous Integration Tests With Capybara](https://thoughtbot.com/blog/write-reliable-asynchronous-integration-tests-with-capybara#summary).
 
-## TODO
+## Backlog
 
 - Wrap libraries.
