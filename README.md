@@ -105,6 +105,10 @@ $ rails new blueprinter --database=postgresql
 
 - [query-string](https://github.com/sindresorhus/query-string).
 
+#### Toasts
+
+- [siiimple-toast](https://github.com/0xgabii/siiimple-toast).
+
 #### Utilities
 
 - [Lodash](https://github.com/lodash/lodash).

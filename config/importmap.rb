@@ -33,3 +33,4 @@ pin "lodash" # @4.17.21
 # - https://generator.jspm.io/#U2NiYGBkDM0rySzJSU1hSKzIzC92MNQz0zMHAKMi6gwaAA
 ##
 
+pin "siiimple-toast" # @3.1.7
