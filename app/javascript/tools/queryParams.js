@@ -3,8 +3,11 @@
  * - https://github.com/sindresorhus/query-string
  */
 import queryString from "query-string";
-
-import _ from "lodash";
+import {
+  isEmpty,
+  isPlainObject,
+  isString
+} from "tools/lodash";
 
 /**
  * NOTE: Parses URL query strings.
@@ -19,9 +22,9 @@ const parseQueryParams = string => queryString.parse(string);
 const stringifyQueryParams = object => queryString.stringify(object);
 
 const appendQueryParams = (url, queryParams) => {
-  if (_.isEmpty(queryParams)) return url;
-  if (_.isString(queryParams)) return `${url}?${stringifyQueryParams(parseQueryParams(queryParams))}`;
-  if (_.isPlainObject(queryParams)) return `${url}?${stringifyQueryParams(queryParams)}`;
+  if (isEmpty(queryParams)) return url;
+  if (isString(queryParams)) return `${url}?${stringifyQueryParams(parseQueryParams(queryParams))}`;
+  if (isPlainObject(queryParams)) return `${url}?${stringifyQueryParams(queryParams)}`;
 
   return url;
 };
