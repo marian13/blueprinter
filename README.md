@@ -6,7 +6,7 @@ An app to generate apps.
 
 | Description | Link |
 | - | - |
-| Local Blueprinter app | [http://localhost:8400](http://localhost:8400) |
+| Local Blueprinter app | [http://localhost:9000](http://localhost:9000) |
 
 ## Development
 
