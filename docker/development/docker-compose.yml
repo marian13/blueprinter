@@ -68,6 +68,7 @@ services:
       dockerfile: ./docker/development/rails/Dockerfile
     container_name: ${PROJECT_NAME}_rails
     depends_on:
+      - action_cable_redis
       - postgres
     environment:
       ACTION_CABLE_REDIS_URL: ${ACTION_CABLE_REDIS_URL}
