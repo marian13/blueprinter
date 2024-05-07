@@ -5,7 +5,6 @@ steps_for :"features/language/select_language" do
   # NOTE: Do nothing intentionally.
   #
   step "a user" do
-
   end
 
   step "the user opens the app" do
@@ -36,11 +35,11 @@ steps_for :"features/language/select_language" do
   end
 
   step "the current page is reloaded" do
-    expect(app.home_page.meta.page_loaded_at).not_to match_selector(%{[data-value="#{@previous_page_loaded_at_value}"]})
+    expect(app.home_page.meta.page_loaded_at).not_to match_selector(%([data-value="#{@previous_page_loaded_at_value}"]))
   end
 
   step "the current page is NOT reloaded" do
-    expect(app.home_page.meta.page_loaded_at).to match_selector(%{[data-value="#{@previous_page_loaded_at_value}"]})
+    expect(app.home_page.meta.page_loaded_at).to match_selector(%([data-value="#{@previous_page_loaded_at_value}"]))
   end
 
   step "the language is switched to the English language" do
@@ -56,6 +55,6 @@ steps_for :"features/language/select_language" do
   end
 
   step "the language is NOT switched" do
-    expect(app.home_page.current_language).to match_selector(%{[lang="#{@previous_language_value}"]})
+    expect(app.home_page.current_language).to match_selector(%([lang="#{@previous_language_value}"]))
   end
 end

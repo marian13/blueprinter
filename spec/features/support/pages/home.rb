@@ -6,6 +6,6 @@ module Pages
 
     section :header, ::Sections::Header, "body header"
 
-    element :generate_app_button, %{[data-test-id="generate_app_button"]}
+    element :generate_app_button, %([data-test-id="generate_app_button"])
   end
 end

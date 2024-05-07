@@ -34,8 +34,6 @@ module Web
           # - https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb#L43
           #
           def generating
-
-
             render turbo_stream.replace "create_app_button", partial: "web/pages/home/frames/create_app_button/download_app_button"
           end
 
@@ -51,4 +49,3 @@ module Web
     end
   end
 end
-

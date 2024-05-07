@@ -1,9 +1,9 @@
-return if (defined? Rails) && !(Rails.env.development? || Rails.env.test?)
+return if (defined? Rails) && !Rails.env.local?
 
-require 'tempfile'
+require "tempfile"
 
-require 'byebug'
-require 'rouge'
+require "byebug"
+require "rouge"
 
 ##
 # Yet another hack how to enable the syntax highlighting for the byebug gem. Works for v10.0.0 and higher.
@@ -12,9 +12,9 @@ require 'rouge'
 # WARNING: Although this hack is based on the monkey patching,
 # use this technique for other issues in your own codebases with a precaution.
 #
-require 'byebug/runner' unless defined? Byebug::VERSION
+require "byebug/runner" unless defined? Byebug::VERSION
 
-if Gem::Version.new(Byebug::VERSION) >= Gem::Version.new('10.0.0')
+if Gem::Version.new(Byebug::VERSION) >= Gem::Version.new("10.0.0")
   module Byebug
     class SourceFileFormatter
       ##
@@ -35,30 +35,28 @@ if Gem::Version.new(Byebug::VERSION) >= Gem::Version.new('10.0.0')
       #
       def file
         @highlighted_file ||=
-          begin
-            if defined? Rouge
-              source = File.read(@file)
+          if defined? Rouge
+            source = File.read(@file)
 
-              theme     = Rouge::Themes::Monokai.new
-              formatter = Rouge::Formatters::Terminal256.new(theme)
-              lexer     = Rouge::Lexers::Ruby.new
+            theme = Rouge::Themes::Monokai.new
+            formatter = Rouge::Formatters::Terminal256.new(theme)
+            lexer = Rouge::Lexers::Ruby.new
 
-              dest = formatter.format(lexer.lex(source))
+            dest = formatter.format(lexer.lex(source))
 
-              # Tempfile with the highlighted syntax is assigned to the instance variable
-              # in order to prevent its premature garbage collection.
-              @tempfile_with_highlighted_syntax = Tempfile.new.tap { |t| t.write(dest) }.tap(&:close)
+            # Tempfile with the highlighted syntax is assigned to the instance variable
+            # in order to prevent its premature garbage collection.
+            @tempfile_with_highlighted_syntax = Tempfile.new.tap { |t| t.write(dest) }.tap(&:close)
 
-              @tempfile_with_highlighted_syntax.path
-            else
-              warn %q{Rouge(a pure Ruby code highlighter) is not defined. Maybe you forgot to require it? (require 'rouge')}
+            @tempfile_with_highlighted_syntax.path
+          else
+            warn "Rouge(a pure Ruby code highlighter) is not defined. Maybe you forgot to require it? (require 'rouge')"
 
-              @file
-            end
+            @file
           end
       end
     end
   end
 else
-  warn 'Byebug version is lower than v10.0.0...'
+  warn "Byebug version is lower than v10.0.0..."
 end

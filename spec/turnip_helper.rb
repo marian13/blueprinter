@@ -55,7 +55,6 @@ require_relative "features/support/pages"
 ##
 # NOTE: Load Site Prism pages.
 #
-require_relative "features/support/pages"
 
 ##
 # NOTE: Load global step.

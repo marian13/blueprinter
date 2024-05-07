@@ -143,7 +143,7 @@ tasks:
 
   docker:rubocop:
     cmds:
-      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task rubocop'
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task rubocop'
     interactive: true
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
@@ -181,6 +181,13 @@ tasks:
     requires:
       vars: [RAILS_PORT]
 
+  docker:standardjs:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task standardjs'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   docker:turnip:
     cmds:
       - |
@@ -201,20 +208,6 @@ tasks:
   docker:yarn:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task yarn'
-    preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
-
-  docker:standard:
-    cmds:
-      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task standard'
-    preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
-
-  docker:standard:autocorrect:
-    cmds:
-      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task standard:autocorrect'
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -246,13 +239,17 @@ tasks:
     cmds:
       - bundle exec erd
 
-  standard:
+  ##
+  # NOTE: Usage examples.
+  #   task standardjs
+  #   AUTOCORRECT=true task standardjs
+  #
+  standardjs:
     cmds:
-      - yarn run standard
-
-  standard:autocorrect:
-    cmds:
-      - yarn run standard --fix
+      - yarn run standard {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
+    vars:
+      AUTOCORRECT_SUFFIX:
+        sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'
 
   ##
   # NOTE: Dev only command.
@@ -316,9 +313,17 @@ tasks:
           --exclude-pattern "./spec/features/**/*" \
           spec
 
+  ##
+  # NOTE: Usage examples.
+  #   task rubocop
+  #   AUTOCORRECT=true task rubocop
+  #
   rubocop:
     cmds:
-      - bundle exec rubocop --config .rubocop.yml
+      - bundle exec rubocop --config .rubocop.yml {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
+    vars:
+      AUTOCORRECT_SUFFIX:
+        sh: ruby -e 'puts "-A" if ENV["AUTOCORRECT"] == "true"'
 
   server:logs:test:
     cmds:

@@ -17,11 +17,6 @@ Capybara.app_host = "http://#{IPSocket.getaddress(Socket.gethostname)}:#{Capybar
 # https://stackoverflow.com/questions/61413196/how-to-run-capybara-tests-using-selenium-chrome-in-a-dockerised-rails-environm
 #
 Capybara.register_driver :docker_selenium_chrome do |app|
-  args = [
-    '--window-size="1280,800"',
-    "--whitelisted-ips=#{Capybara.server_host}"
-  ]
-
   # require "debug"; binding.break
 
   ##
@@ -44,7 +39,7 @@ Capybara.register_driver :docker_selenium_chrome do |app|
     # NOTE: Driver connects directly to container.
     # See `services` -> `chrome` in `docker-compose.yml`.
     #
-    url: %{http://#{ENV.fetch("CHROME_HOST")}:#{ENV.fetch("CHROME_PORT")}/wd/hub},
+    url: %(http://#{ENV.fetch("CHROME_HOST")}:#{ENV.fetch("CHROME_PORT")}/wd/hub),
     options: options
   )
 
