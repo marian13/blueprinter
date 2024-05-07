@@ -33,7 +33,7 @@ jobs:
     # NOTE: Docker container was NOT used before. It is added to have a way to work with Postgres.
     # - https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers#running-jobs-in-containers
     #
-    container: ruby:3.3-slim-20
+    container: timbru31/ruby-node:3.3-slim-20
     name: Lint
 
     services:
