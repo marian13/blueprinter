@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "create_app_button" do %>
+  <%= link_to web_pages_home_frames_create_app_button_generate_path, role: "button", "aria-busy" => true, disabled: true, data: {turbo_method: :post, "test-id" => "generate_app_button"} do %>
+    <%= I18n.t("web.pages.home.frames.create_app_button.generating_app_button.text") %>
+  <% end %>
+
+  <%= turbo_stream_from "create_app_button" %>
+<% end %>

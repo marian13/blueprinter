@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "create_app_button" do %>
+  <%= link_to web_pages_home_frames_create_app_button_generate_path, role: "button", data: {turbo_method: :post, "test-id" => "generate_app_button"} do %>
+    <%= I18n.t("web.pages.home.frames.create_app_button.generate_app_button.text") %>
+  <% end %>
+<% end %>
+
