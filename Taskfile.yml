@@ -23,9 +23,9 @@ tasks:
   ##
   # - https://guides.rubyonrails.org/active_record_migrations.html#resetting-the-database
   #
-  db:reset:test:
+  db:reset:
     cmds:
-      - RAILS_ENV=test bundle exec rails db:reset
+      - bundle exec rails db:reset
 
   ##
   # NOTE: `docker compose run` automatically builds image if is not built yet.

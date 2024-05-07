@@ -196,7 +196,7 @@ jobs:
       - name: Set up Ruby gems
         run: task install
       - name: Set up test Postgres
-        run: task db:reset:test
+        run: RAILS_ENV=test task db:reset
         env:
           PROJECT_NAME: blueprinter
           POSTGRES_HOST: postgres
