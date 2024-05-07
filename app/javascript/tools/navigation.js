@@ -1,5 +1,5 @@
-const navigateTo = url => Turbo.visit(url);
+const navigateTo = url => Turbo.visit(url)
 
 export {
   navigateTo
-};
+}

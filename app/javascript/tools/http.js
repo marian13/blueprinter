@@ -11,7 +11,7 @@
  *
  * IMPORTANT: Do NOT use `axios` directly. Use `httpClient` wrapper.
  */
-const httpClient = window.axios;
+const httpClient = window.axios
 
 /**
  * Sets `csrfToken` to `axios` default header.
@@ -21,19 +21,19 @@ const httpClient = window.axios;
  * - https://github.com/rails/webpacker/issues/1015#issuecomment-386241735
  */
 const setupCSRFToken = () => {
-  const csrfToken = document.querySelector("meta[name=csrf-token]")?.content;
+  const csrfToken = document.querySelector('meta[name=csrf-token]')?.content
 
-  if (!csrfToken) return;
+  if (!csrfToken) return
 
-  httpClient.defaults.headers.common["X-CSRF-Token"] = csrfToken;
-};
+  httpClient.defaults.headers.common['X-CSRF-Token'] = csrfToken
+}
 
-const getHttpRequst = httpClient.get;
-const postHttpRequst = httpClient.get;
+const getHttpRequst = httpClient.get
+const postHttpRequst = httpClient.get
 
-window.addEventListener("DOMContentLoaded", setupCSRFToken);
+window.addEventListener('DOMContentLoaded', setupCSRFToken)
 
 export {
   getHttpRequst,
-  postHttpRequst,
-};
+  postHttpRequst
+}

@@ -2,7 +2,7 @@
  * Lightweight, unobtrusive, configurable JavaScript logger.
  * - https://github.com/jonnyreeves/js-logger
  */
-import Logger from "js-logger";
+import Logger from 'js-logger'
 
 /**
  * NOTE:
@@ -19,7 +19,7 @@ import Logger from "js-logger";
 Logger.useDefaults({
   defaultLevel: Logger.INFO,
   formatter: messages => messages.unshift(`[${new Date().toISOString()}]`)
-});
+})
 
 /**
  * NOTE: Exposes js-Logger globally in order to have a way to change log levels from browser console.
@@ -28,6 +28,6 @@ Logger.useDefaults({
  *   Logger.setLevel(Logger.OFF);
  *
  */
-window.Logger = Logger;
+window.Logger = Logger
 
-export default Logger;
+export default Logger

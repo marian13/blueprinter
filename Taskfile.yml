@@ -212,6 +212,13 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  docker:standard:autocorrect:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task standard:autocorrect'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   ##
   # NOTE: Dev only command.
   # NOTE: macOS specific command.
@@ -242,6 +249,10 @@ tasks:
   standard:
     cmds:
       - yarn run standard
+
+  standard:autocorrect:
+    cmds:
+      - yarn run standard --fix
 
   ##
   # NOTE: Dev only command.

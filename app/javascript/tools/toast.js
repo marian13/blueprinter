@@ -1,6 +1,6 @@
-import siiimpleToast from "siiimple-toast";
+import siiimpleToast from 'siiimple-toast'
 
-import { isEmpty } from "tools/lodash";
+import { isEmpty } from 'tools/lodash'
 
 /**
  * NOTE: Example options are taken from official README.
@@ -19,21 +19,21 @@ const toast = siiimpleToast.default.setOptions({
   style: {
     transform: 'scale(0.5)',
     transition: 'all 0.4s ease-out'
-  },
-});
+  }
+})
 
-const withToastOptions = (toast, options) => isEmpty(options) ? toast : toast.setOptions(options);
+const withToastOptions = (toast, options) => isEmpty(options) ? toast : toast.setOptions(options)
 
 /**
  * NOTE: `content` can be HTML content.
  * - https://github.com/0xgabii/siiimple-toast?tab=readme-ov-file#onther-examples
  */
-const dispaySuccessToast = (content, options) => withToastOptions(toast, options).success(content);
-const dispayFailureToast = (content, options) => withToastOptions(toast, options).alert(content);
-const dispayToast = (content, options) => withToastOptions(toast, options).message(content);
+const dispaySuccessToast = (content, options) => withToastOptions(toast, options).success(content)
+const dispayFailureToast = (content, options) => withToastOptions(toast, options).alert(content)
+const dispayToast = (content, options) => withToastOptions(toast, options).message(content)
 
 export {
   dispayFailureToast,
   dispaySuccessToast,
   dispayToast
-};
+}

@@ -1,11 +1,11 @@
-import lodash from "lodash";
+import lodash from 'lodash'
 
-const isEmpty = lodash.isEmpty;
-const isPlainObject = lodash.isPlainObject;
-const isString = lodash.isString;
+const isEmpty = lodash.isEmpty
+const isPlainObject = lodash.isPlainObject
+const isString = lodash.isString
 
 export {
   isEmpty,
   isPlainObject,
   isString
-};
+}
