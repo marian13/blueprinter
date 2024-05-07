@@ -93,13 +93,17 @@ $ rails new blueprinter --database=postgresql
 
 - [Stimulus](https://github.com/hotwired/stimulus).
 
-#### CSS toolkits
+#### CSS Toolkits
 
 - [Pico](https://github.com/picocss/pico).
 
 #### HTTP Requests
 
 - [Axios](https://github.com/axios/axios).
+
+#### Websockets
+
+- [Action Cable](https://guides.rubyonrails.org/action_cable_overview.html).
 
 #### Query Params
 
@@ -116,6 +120,8 @@ $ rails new blueprinter --database=postgresql
 ### Databases
 
 - [Postgres](https://github.com/postgres/postgres).
+
+- [Redis](https://github.com/redis/redis).
 
 ### Tests
 
@@ -167,9 +173,15 @@ $ rails new blueprinter --database=postgresql
 
 - [Selenium with Chrome](https://github.com/SeleniumHQ/docker-selenium).
 
+- [Redis](https://github.com/docker-library/redis).
+
 ### CI
 
 - [GitHub Actions](https://github.com/features/actions).
+
+### Production
+
+- TODO: [Stand alone Action Cable server](https://guides.rubyonrails.org/action_cable_overview.html#running-standalone-cable-servers).
 
 ## Contributing
 
