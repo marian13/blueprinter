@@ -1,0 +1,26 @@
+##
+# NOTE: Strict Rubocop config suggested by Evil Martians. Strict means no way to bypass.
+# - https://gist.github.com/palkan/ee1d0247be2076e38020a9a6fbae68d5
+#
+inherit_from:
+  - ../.rubocop_todo.yml
+
+Lint/Debugger:
+  Enabled: true
+  Exclude: []
+
+RSpec/Focus:
+  Enabled: true
+  Exclude: []
+
+Rails/Output:
+  Enabled: true
+  Exclude: []
+
+Rails/FindEach:
+  Enabled: true
+  Exclude: []
+
+Rails/UniqBeforePluck:
+  Enabled: true
+  Exclude: []

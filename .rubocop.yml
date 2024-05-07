@@ -1,0 +1,33 @@
+##
+# NOTE: Standard based Rubocop config suggested by Evil Martians.
+# - https://github.com/standardrb/standard?tab=readme-ov-file#running-standards-rules-via-rubocop
+# - https://evilmartians.com/chronicles/rubocoping-with-legacy-bring-your-ruby-code-up-to-standard
+#
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - standard
+  - standard-custom
+  - standard-rails
+  - standard-performance
+  - rubocop-rails
+  - rubocop-performance
+
+inherit_gem:
+  standard: config/base.yml
+  standard-custom: config/base.yml
+  standard-rails: config/base.yml
+  standard-performance: config/base.yml
+
+inherit_from:
+  - .rubocop/rspec.yml
+  - .rubocop/custom.yml
+  - .rubocop_todo.yml
+  - .rubocop/strict.yml
+
+AllCops:
+  SuggestExtensions: false
+  TargetRubyVersion: <%= ENV["RUBY_VERSION"].to_s %>
+

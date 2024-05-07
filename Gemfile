@@ -4,7 +4,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.3.0"
+ruby ENV["RUBY_VERSION"].to_s
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -172,4 +172,44 @@ end
 #
 group :test do
   gem "super_diff", "~> 0.12.1"
+end
+
+##
+# Rubocop - Ruby static code analyzer and formatter.
+# - https://github.com/rubocop/rubocop
+#
+group :development do
+  gem "rubocop", "~> 1.62.0"
+end
+
+##
+# Rubocop cops for Rails.
+# - https://github.com/rubocop/rubocop
+#
+group :development do
+  gem "rubocop-rails", "~> 2.23.1"
+end
+
+##
+# Rubocop cops for RSpec.
+# - https://github.com/rubocop/rubocop-rspec
+#
+group :development do
+  gem "rubocop-rspec", "~> 2.29.2"
+end
+
+##
+# Standard - Predefined Rubocop config.
+# - https://github.com/standardrb/standard
+#
+group :development do
+  gem "standard", "~> 1.35.1"
+end
+
+##
+# Standard Rails - Predefined Rubocop config for Rails.
+# - https://github.com/standardrb/standard-rails
+#
+group :development do
+  gem "standard-rails", "~> 1.0.2"
 end

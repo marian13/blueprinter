@@ -129,6 +129,14 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  docker:rubocop:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task rubocop'
+    interactive: true
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   docker:server:
     cmds:
       - rm tmp/pids/server.pid 2> /dev/null || true
@@ -265,6 +273,10 @@ tasks:
           --format progress \
           --exclude-pattern "./spec/features/**/*" \
           spec
+
+  rubocop:
+    cmds:
+      - bundle exec rubocop --config .rubocop.yml
 
   server:logs:test:
     cmds:
