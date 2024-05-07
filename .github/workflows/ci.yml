@@ -87,6 +87,8 @@ jobs:
         uses: arduino/setup-task@v1
       - name: Set up Ruby gems
         run: task install
+      - name: Run Rubocop
+        run: task rubocop
       ##
       # NOTE: Required ENV vars can be found by `services -> rails -> environment` in `docker/development/docker-compose.yml`.
       #
