@@ -83,6 +83,10 @@ $ rails new blueprinter --database=postgresql
 
 - [Rails](https://github.com/rails/rails).
 
+#### Service Objects
+
+- [Convenient Service](https://github.com/marian13/convenient_service).
+
 #### I18n
 
 - [Ruby I18n](https://github.com/ruby-i18n/i18n).
@@ -173,13 +177,15 @@ $ rails new blueprinter --database=postgresql
 
 - [Annotate (aka AnnotateModels)](https://github.com/ctran/annotate_models).
 
+- [Standard JS](https://github.com/standard/standard).
+
 ### Documenting
 
 - [Rails ERD](https://github.com/voormedia/rails-erd).
 
 ### Containerization
 
-- [Ruby](https://github.com/docker-library/ruby).
+- [Ruby + Node](https://github.com/timbru31/docker-ruby-node).
 
 - [Postgres](https://github.com/docker-library/postgres).
 

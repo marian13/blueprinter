@@ -4,7 +4,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.3.0"
+ruby "3.3.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -213,3 +213,9 @@ end
 group :development do
   gem "standard-rails", "~> 1.0.2"
 end
+
+##
+# Convenient Service - Service object pattern implementation in Ruby.
+# - https://github.com/marian13/convenient_service
+#
+gem "convenient_service", "~> 0.18.0"

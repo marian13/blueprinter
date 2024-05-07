@@ -25,7 +25,7 @@ jobs:
     #
     runs-on: ubuntu-20.04
     ##
-    # NOTE: `FROM ruby:3.3.0-slim` in `docker/development/rails/Dockerfile`.
+    # NOTE: `FROM timbru31/ruby-node:3.3-slim-20` in `docker/development/rails/Dockerfile`.
     #
     # NOTE: How to run Docker containers in GitHub Actions?
     # - https://docs.github.com/en/actions/using-jobs/running-jobs-in-a-container
