@@ -1,0 +1,9 @@
+{
+  "name": "blueprinter",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "^17.1.0"
+  }
+}

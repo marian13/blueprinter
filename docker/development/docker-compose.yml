@@ -64,6 +64,9 @@ services:
 
   rails:
     build:
+      args:
+        - RUBY_VERSION
+        - NODE_VERSION
       context: ../..
       dockerfile: ./docker/development/rails/Dockerfile
     container_name: ${PROJECT_NAME}_rails
@@ -79,6 +82,7 @@ services:
       POSTGRES_USERNAME: ${POSTGRES_USERNAME}
       POSTGRES_VERSION: ${POSTGRES_VERSION}
       PROJECT_NAME: ${PROJECT_NAME}
+      RUBY_VERSION: ${RUBY_VERSION}
       TURNIP_RAILS_PORT: ${TURNIP_RAILS_PORT}
     stdin_open: true
     tty: true

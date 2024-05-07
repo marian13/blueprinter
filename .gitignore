@@ -50,3 +50,8 @@ TODO
 # NOTE: Ignores `.byebug_history`.
 #
 .byebug_history
+
+##
+# NOTE: Ignores `/node_modules`.
+#
+/node_modules

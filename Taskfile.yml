@@ -20,6 +20,10 @@ tasks:
     cmds:
       - bundle exec annotate --models --position-in-class=bottom --format=bare --exclude=tests
 
+  bundle:
+    cmds:
+      - bundle
+
   ##
   # - https://guides.rubyonrails.org/active_record_migrations.html#resetting-the-database
   #
@@ -54,6 +58,14 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml build rails
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c "task install"
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:bundle:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task bundle'
+    interactive: true
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -186,6 +198,20 @@ tasks:
     requires:
       vars: [TURNIP_RAILS_PORT]
 
+  docker:yarn:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task yarn'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:standard:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task standard'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   ##
   # NOTE: Dev only command.
   # NOTE: macOS specific command.
@@ -212,6 +238,10 @@ tasks:
   erd:
     cmds:
       - bundle exec erd
+
+  standard:
+    cmds:
+      - yarn run standard
 
   ##
   # NOTE: Dev only command.
@@ -247,7 +277,8 @@ tasks:
 
   install:
     cmds:
-      - bundle install
+      - task bundle
+      - task yarn
 
   ##
   # NOTE: Same as `task annotate`, but with `--frozen` option for linting.
@@ -323,3 +354,7 @@ tasks:
   turnip:open:
     cmds:
       - open tmp/turnip_report.html
+
+  yarn:
+    cmds:
+      - yarn

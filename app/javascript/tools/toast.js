@@ -28,12 +28,12 @@ const withToastOptions = (toast, options) => isEmpty(options) ? toast : toast.se
  * NOTE: `content` can be HTML content.
  * - https://github.com/0xgabii/siiimple-toast?tab=readme-ov-file#onther-examples
  */
-const pushFailureToast = (content, options) => withToastOptions(toast, options).alert(content);
-const pushSuccessToast = (content, options) => withToastOptions(toast, options).success(content);
-const pushToast = (content, options) => withToastOptions(toast, options).message(content);
+const dispaySuccessToast = (content, options) => withToastOptions(toast, options).success(content);
+const dispayFailureToast = (content, options) => withToastOptions(toast, options).alert(content);
+const dispayToast = (content, options) => withToastOptions(toast, options).message(content);
 
 export {
-  pushFailureToast,
-  pushSuccessToast,
-  pushToast
+  dispayFailureToast,
+  dispaySuccessToast,
+  dispayToast
 };

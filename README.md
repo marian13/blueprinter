@@ -157,6 +157,18 @@ $ rails new blueprinter --database=postgresql
 
 ### Linting
 
+- [RuboCop](https://github.com/rubocop/rubocop).
+
+- [RuboCop Rails](https://github.com/rubocop/rubocop-rails).
+
+- [RuboCop RSpec](https://github.com/rubocop/rubocop-rspec).
+
+- [RuboCop Performance](https://github.com/rubocop/rubocop-performance).
+
+- [Standard Ruby](https://github.com/standardrb/standard).
+
+- [standard-rails](https://github.com/standardrb/standard-rails).
+
 - [DbSchemaChecker](https://github.com/kufu/db_schema_checker).
 
 - [Annotate (aka AnnotateModels)](https://github.com/ctran/annotate_models).
@@ -194,5 +206,7 @@ $ rails new blueprinter --database=postgresql
 - [Write Reliable, Asynchronous Integration Tests With Capybara](https://thoughtbot.com/blog/write-reliable-asynchronous-integration-tests-with-capybara#summary).
 
 ## Backlog
+
+- 100% spec coverage.
 
 - Wrap libraries.
