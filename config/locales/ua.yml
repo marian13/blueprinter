@@ -1,4 +1,12 @@
 ua:
-  home_page:
-    generate_app_button:
-      text: "Згенерувати Застосунок"
+  web:
+    pages:
+      home:
+        frames:
+          create_app_button:
+            generate_app_button:
+              text: "Згенерувати Застосунок"
+            generating_app_button:
+              text: "Застосунок генерується..."
+            download_app_button:
+              text: "Завантажити Застосунок"

@@ -1,4 +1,12 @@
 en:
-  home_page:
-    generate_app_button:
-      text: "Generate App"
+  web:
+    pages:
+      home:
+        frames:
+          create_app_button:
+            generate_app_button:
+              text: "Generate App"
+            generating_app_button:
+              text: "Generating App..."
+            download_app_button:
+              text: "Download App"
