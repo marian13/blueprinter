@@ -33,7 +33,7 @@ jobs:
     # NOTE: Docker container was NOT used before. It is added to have a way to work with Postgres.
     # - https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers#running-jobs-in-containers
     #
-    container: ruby:3.3.0-slim
+    container: ruby:3.3-slim-20
     name: Lint
 
     services:
@@ -74,10 +74,6 @@ jobs:
             && apt-get install --no-install-recommends -y gnupg \
             && apt-get clean \
             && rm -rf /var/lib/apt/lists/*
-      - name: Install Node.js and Yarn
-        uses: DerYeger/yarn-setup-action@master
-        with:
-          node-version: 20
       - name: Install Task (task runner)
         uses: arduino/setup-task@v1
       ##
