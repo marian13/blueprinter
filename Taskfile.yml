@@ -1,16 +1,28 @@
 version: '3'
 
 ##
+# NOTE: All tasks are sorted alphabetically.
+#
 # NOTE: `open` tasks only navigate/open apps. They are NOT running any other commands.
+#
+# TODO: Global preconditions are imitated using YAML anchors. Replace anchors once native support added.
+# - https://github.com/go-task/task/issues/294
 ##
 
 ##
-# TODO: Global preconditions are imitated using YAML anchors. Replace anchors once native support added.
-# - https://github.com/go-task/task/issues/294
+# Ensures that a task is executed for host OS.
 #
-<<: &from-host-os
-  - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-    msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+from-host-os: &from-host-os
+  sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+  msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+##
+# Ensures that a task is executed for macOS.
+# - https://stackoverflow.com/a/17072017/12201472
+#
+from-mac-os: &from-mac-os
+  sh: '[ "$(uname)" == "Darwin" ]'
+  msg: This task uses macOS specific commands. Try to adjust it your OS and/or run it manually.
 
 ##
 # IMPORTANT: All tasks listed in this file should be executed from the root folder.
@@ -63,7 +75,7 @@ tasks:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash
     interactive: true
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   ##
   # NOTE:
@@ -82,26 +94,27 @@ tasks:
       - docker compose -f docker/development/docker-compose.yml build rails
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c "task install"
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:bundle:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task bundle'
     interactive: true
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:chrome:build:
     cmds:
       - docker-compose -f docker/development/docker-compose.yml up --build --remove-orphans chrome
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:chrome:http:open:
     cmds:
       - open http://localhost:{{.HOST_OS_CHROME_HTTP_PORT}}
     preconditions:
-      *from-host-os
+      - *from-host-os
+      - *from-mac-os
     requires:
       vars: [HOST_OS_CHROME_HTTP_PORT]
 
@@ -109,7 +122,7 @@ tasks:
     cmds:
       - docker logs --follow {{.PROJECT_NAME}}_chrome
     preconditions:
-      *from-host-os
+      - *from-host-os
     requires:
       vars: [PROJECT_NAME]
 
@@ -117,7 +130,8 @@ tasks:
     cmds:
       - open vnc://localhost:{{.HOST_OS_CHROME_VNC_PORT}}
     preconditions:
-      *from-host-os
+      - *from-host-os
+      - *from-mac-os
     requires:
       vars: [HOST_OS_CHROME_VNC_PORT]
 
@@ -125,7 +139,7 @@ tasks:
     cmds:
       - docker-compose -f docker/development/docker-compose.yml down
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   ##
   # NOTE: Importmap for Rails.
@@ -135,7 +149,7 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task importmap:pin -- {{.CLI_ARGS}}'
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   ##
   # NOTE: Importmap for Rails.
@@ -145,27 +159,27 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task importmap:unpin -- {{.CLI_ARGS}}'
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:lint:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task lint'
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:rspec:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task rspec'
     interactive: true
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:rubocop:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task rubocop'
     interactive: true
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:server:
     cmds:
@@ -188,13 +202,16 @@ tasks:
           '
     interactive: true
     preconditions:
-      *from-host-os
+      - *from-host-os
     requires:
       vars: [RAILS_PORT]
 
   docker:server:open:
     cmds:
       - open -na "Google Chrome" --args --new-window --incognito "http://localhost:{{.RAILS_PORT}}"
+    preconditions:
+      - *from-host-os
+      - *from-mac-os
     requires:
       vars: [RAILS_PORT]
 
@@ -202,13 +219,13 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task standardjs'
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:stylelint:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task stylelint'
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   docker:turnip:
     cmds:
@@ -222,7 +239,7 @@ tasks:
           bash -c 'task turnip'
     interactive: true
     preconditions:
-      *from-host-os
+      - *from-host-os
     requires:
       vars: [TURNIP_RAILS_PORT]
 
@@ -230,7 +247,7 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task yarn'
     preconditions:
-      *from-host-os
+      - *from-host-os
 
   ##
   # NOTE: Dev only command.
@@ -240,6 +257,9 @@ tasks:
   docker:start:
     cmds:
       - open -a Docker
+    preconditions:
+      - *from-host-os
+      - *from-mac-os
 
   ##
   # NOTE: Dev only command.
@@ -247,6 +267,8 @@ tasks:
   editor:open:
     cmds:
       - code .
+    preconditions:
+      - *from-host-os
 
   ##
   # Generate Entity-Relationship Diagrams for Rails applications.
@@ -260,39 +282,15 @@ tasks:
       - bundle exec erd
 
   ##
-  # NOTE: Usage examples.
-  #   task standardjs
-  #   AUTOCORRECT=true task standardjs
-  #
-  standardjs:
-    cmds:
-      - yarn run standard {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
-    vars:
-      AUTOCORRECT_SUFFIX:
-        sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'
-
-  ##
-  # NOTE: Usage examples.
-  #   task stylelint
-  #   # Lint all CSS files.
-  #
-  #   AUTOCORRECT=true task stylelint
-  #   # Autoformat all CSS files.
-  #
-  stylelint:
-    cmds:
-      - yarn run stylelint --config ./linters/.stylelintrc.js {{.AUTOCORRECT_SUFFIX}} **/*.css
-    vars:
-      AUTOCORRECT_SUFFIX:
-        sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'
-
-  ##
   # NOTE: Dev only command.
   # NOTE: macOS specific command.
   #
   github:open:
     cmds:
       - open -na "Google Chrome" --args --new-window --incognito "https://github.com/marian13/blueprinter"
+    preconditions:
+      - *from-host-os
+      - *from-mac-os
 
   ##
   # NOTE: Importmap for Rails.
@@ -352,9 +350,36 @@ tasks:
       AUTOCORRECT_SUFFIX:
         sh: ruby -e 'puts "-A" if ENV["AUTOCORRECT"] == "true"'
 
+  ##
+  # NOTE: Usage examples.
+  #   task standardjs
+  #   AUTOCORRECT=true task standardjs
+  #
+  standardjs:
+    cmds:
+      - yarn run standard {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
+    vars:
+      AUTOCORRECT_SUFFIX:
+        sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'
+
   server:logs:test:
     cmds:
       - touch log/test.log && tail -f log/test.log
+
+  ##
+  # NOTE: Usage examples.
+  #   task stylelint
+  #   # Lint all CSS files.
+  #
+  #   AUTOCORRECT=true task stylelint
+  #   # Autoformat all CSS files.
+  #
+  stylelint:
+    cmds:
+      - yarn run stylelint --config ./linters/.stylelintrc.js {{.AUTOCORRECT_SUFFIX}} **/*.css
+    vars:
+      AUTOCORRECT_SUFFIX:
+        sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'
 
   ##
   # NOTE: Dev only command.
@@ -362,6 +387,8 @@ tasks:
   tmuxinator:start:
     cmds:
       - direnv exec . tmuxinator start blueprinter --project-config=.dev/.tmuxinator.yml
+    preconditions:
+      - *from-host-os
 
   ##
   # NOTE: Dev only command.
@@ -369,6 +396,8 @@ tasks:
   tmuxinator:stop:
     cmds:
       - direnv exec . tmuxinator stop blueprinter --project-config=.dev/.tmuxinator.yml
+    preconditions:
+      - *from-host-os
 
   ##
   # NOTE: RSpec supports multiple formatters.
@@ -397,6 +426,9 @@ tasks:
   turnip:open:
     cmds:
       - open tmp/turnip_report.html
+    preconditions:
+      - *from-host-os
+      - *from-mac-os
 
   yarn:
     cmds:
