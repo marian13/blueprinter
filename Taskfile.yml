@@ -345,7 +345,7 @@ tasks:
   #
   rubocop:
     cmds:
-      - bundle exec rubocop --config .rubocop.yml {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
+      - bundle exec rubocop --config ./linters/.rubocop.yml {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
     vars:
       AUTOCORRECT_SUFFIX:
         sh: ruby -e 'puts "-A" if ENV["AUTOCORRECT"] == "true"'
