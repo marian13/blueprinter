@@ -13,12 +13,20 @@ tasks:
   # NOTE: Annotate (aka AnnotateModels) options.
   # - https://github.com/ctran/annotate_models/blob/develop/lib/annotate/parser.rb
   #
-  # NOTE: Same as `task lint:annotate`, but without `--frozen` option.
-  # IMPORTANT: Must be kept in sync with `task lint:annotate`.
+  # NOTE: Same as `task annotate`, but without `--frozen` option.
+  # IMPORTANT: Must be kept in sync with `task annotate`.
   #
   annotate:
     cmds:
       - bundle exec annotate --models --position-in-class=bottom --format=bare --exclude=tests
+
+  ##
+  # NOTE: Same as `task annotate`, but with `--frozen` option for linting.
+  # IMPORTANT: Must be kept in sync with `task annotate`.
+  #
+  annotate:lint:
+    cmds:
+      - bundle exec annotate --models --position-in-class=bottom --format=bare --exclude=tests --frozen
 
   bundle:
     cmds:
@@ -30,6 +38,14 @@ tasks:
   db:reset:
     cmds:
       - bundle exec rails db:reset
+
+  ##
+  # NOTE: Rake task that allows to verify whether schema.rb and migration files have been correctly committed.
+  # - https://github.com/kufu/db_schema_checker
+  #
+  db:schema:lint:
+    cmds:
+      - RAILS_ENV=test bundle exec rails db:migrate:reset:check
 
   ##
   # NOTE: `docker compose run` automatically builds image if is not built yet.
@@ -129,6 +145,13 @@ tasks:
   docker:importmap:unpin:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task importmap:unpin -- {{.CLI_ARGS}}'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:lint:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task lint'
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -310,21 +333,13 @@ tasks:
       - task bundle
       - task yarn
 
-  ##
-  # NOTE: Same as `task annotate`, but with `--frozen` option for linting.
-  # IMPORTANT: Must be kept in sync with `task annotate`.
-  #
-  lint:annotate:
+  lint:
     cmds:
-      - bundle exec annotate --models --position-in-class=bottom --format=bare --exclude=tests --frozen
-
-  ##
-  # Rake task that allows to verify whether schema.rb and migration files have been correctly committed.
-  # - https://github.com/kufu/db_schema_checker
-  #
-  lint:db:schema:
-    cmds:
-      - RAILS_ENV=test bundle exec rails db:migrate:reset:check
+      - AUTOCORRECT={{.AUTOCORRECT}} task stylelint
+      - AUTOCORRECT={{.AUTOCORRECT}} task standardjs
+      - AUTOCORRECT={{.AUTOCORRECT}} task rubocop
+      - AUTOCORRECT={{.AUTOCORRECT}} task db:schema:lint
+      - AUTOCORRECT={{.AUTOCORRECT}} task annotate:lint
 
   rspec:
     cmds:

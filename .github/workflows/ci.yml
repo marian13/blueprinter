@@ -90,7 +90,7 @@ jobs:
       - name: Run Stylint
         run: task stylelint
       - name: Run Standard JS
-        run: task standard
+        run: task standardjs
       - name: Run Rubocop
         run: task rubocop
       ##
