@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+/**
+ * Turbo adds `[aria-busy=true]` during navigation to `turbo-frame` elements.
+ * Pico adds loading indicator to elements with `[aria-busy=true]`.
+ * The rule is overrides default Pico behaviour.
+ * - https://turbo.hotwired.dev/handbook/frames
+ * - https://picocss.com/docs/loading
+ *
+ */
+turbo-frame[aria-busy="true"]::before {
+  display: none;
+}
