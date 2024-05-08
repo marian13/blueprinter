@@ -219,3 +219,9 @@ end
 # - https://github.com/marian13/convenient_service
 #
 gem "convenient_service", "~> 0.18.0"
+
+##
+# dry-initializer - DSL for building class initializer with params and options.
+# - https://github.com/dry-rb/dry-initializer
+#
+gem "dry-initializer", "~> 3.1.1"
