@@ -188,6 +188,13 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  docker:stylelint:
+    cmds:
+      - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task stylelint'
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   docker:turnip:
     cmds:
       - |
@@ -247,6 +254,21 @@ tasks:
   standardjs:
     cmds:
       - yarn run standard {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
+    vars:
+      AUTOCORRECT_SUFFIX:
+        sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'
+
+  ##
+  # NOTE: Usage examples.
+  #   task stylelint
+  #   # Lint all CSS files.
+  #
+  #   AUTOCORRECT=true task stylelint
+  #   # Autoformat all CSS files.
+  #
+  stylelint:
+    cmds:
+      - yarn run stylelint --config ./linters/.stylelintrc.js {{.AUTOCORRECT_SUFFIX}} **/*.css
     vars:
       AUTOCORRECT_SUFFIX:
         sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'

@@ -179,6 +179,10 @@ $ rails new blueprinter --database=postgresql
 
 - [Standard JS](https://github.com/standard/standard).
 
+- [Stylelint](https://github.com/stylelint/stylelint).
+
+- [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard).
+
 ### Documenting
 
 - [Rails ERD](https://github.com/voormedia/rails-erd).

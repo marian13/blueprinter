@@ -87,6 +87,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Set up Ruby gems, Node packages
         run: task install
+      - name: Run Stylint
+        run: task stylelint
       - name: Run Standard JS
         run: task standard
       - name: Run Rubocop
@@ -198,7 +200,7 @@ jobs:
       - name: Install Task (task runner)
         uses: arduino/setup-task@v1
       - name: Set up Ruby gems
-        run: task install
+        run: task bundle
       - name: Set up test Postgres
         run: RAILS_ENV=test task db:reset
         env:
