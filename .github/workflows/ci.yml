@@ -1,4 +1,8 @@
 ##
+# TODO: Post `turnip_report.html` and ERD diagram to GitHub Pages after green CI.
+##
+
+##
 # CI using GitHub Actions.
 #
 # NOTE: GitHub Actions DSL.

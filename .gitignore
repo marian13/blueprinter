@@ -55,3 +55,8 @@ TODO
 # NOTE: Ignores `/node_modules`.
 #
 /node_modules
+
+##
+# NOTE: Ignores `.turnip_report.html`.
+#
+.turnip_report.html
