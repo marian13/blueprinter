@@ -5,6 +5,14 @@ version: '3'
 ##
 
 ##
+# TODO: Global preconditions are imitated using YAML anchors. Replace anchors once native support added.
+# - https://github.com/go-task/task/issues/294
+#
+<<: &from-host-os
+  - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+    msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+##
 # IMPORTANT: All tasks listed in this file should be executed from the root folder.
 # - https://taskfile.dev/usage/#task-directory
 #
@@ -55,8 +63,7 @@ tasks:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash
     interactive: true
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   ##
   # NOTE:
@@ -75,30 +82,26 @@ tasks:
       - docker compose -f docker/development/docker-compose.yml build rails
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c "task install"
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:bundle:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task bundle'
     interactive: true
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:chrome:build:
     cmds:
       - docker-compose -f docker/development/docker-compose.yml up --build --remove-orphans chrome
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:chrome:http:open:
     cmds:
       - open http://localhost:{{.HOST_OS_CHROME_HTTP_PORT}}
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
     requires:
       vars: [HOST_OS_CHROME_HTTP_PORT]
 
@@ -106,8 +109,7 @@ tasks:
     cmds:
       - docker logs --follow {{.PROJECT_NAME}}_chrome
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
     requires:
       vars: [PROJECT_NAME]
 
@@ -115,8 +117,7 @@ tasks:
     cmds:
       - open vnc://localhost:{{.HOST_OS_CHROME_VNC_PORT}}
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
     requires:
       vars: [HOST_OS_CHROME_VNC_PORT]
 
@@ -124,8 +125,7 @@ tasks:
     cmds:
       - docker-compose -f docker/development/docker-compose.yml down
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   ##
   # NOTE: Importmap for Rails.
@@ -135,8 +135,7 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task importmap:pin -- {{.CLI_ARGS}}'
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   ##
   # NOTE: Importmap for Rails.
@@ -146,31 +145,27 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task importmap:unpin -- {{.CLI_ARGS}}'
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:lint:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task lint'
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:rspec:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task rspec'
     interactive: true
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:rubocop:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task rubocop'
     interactive: true
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:server:
     cmds:
@@ -193,8 +188,7 @@ tasks:
           '
     interactive: true
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
     requires:
       vars: [RAILS_PORT]
 
@@ -208,15 +202,13 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task standardjs'
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:stylelint:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'AUTOCORRECT={{.AUTOCORRECT}} task stylelint'
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   docker:turnip:
     cmds:
@@ -230,8 +222,7 @@ tasks:
           bash -c 'task turnip'
     interactive: true
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
     requires:
       vars: [TURNIP_RAILS_PORT]
 
@@ -239,8 +230,7 @@ tasks:
     cmds:
       - docker compose -f docker/development/docker-compose.yml run --rm rails bash -c 'task yarn'
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      *from-host-os
 
   ##
   # NOTE: Dev only command.
