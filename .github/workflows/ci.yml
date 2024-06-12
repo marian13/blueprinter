@@ -63,6 +63,7 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+
       ##
       # NOTE: How to use Redis with Github Actions?
       # - https://docs.github.com/en/actions/using-containerized-services/creating-redis-service-containers
@@ -192,6 +193,8 @@ jobs:
       # - https://github.com/ikalnytskyi/action-setup-postgres
       # - https://github.com/actions/runner-images
       #
+      # IMPORTANT: Keep in sync with `POSTGRES_VERSION` in `.env`.
+      #
       postgres:
         image: postgres:13.2
         env:
@@ -203,6 +206,22 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+
+      ##
+      # NOTE: How to use Redis with Github Actions?
+      # - https://docs.github.com/en/actions/using-containerized-services/creating-redis-service-containers
+      #
+      # IMPORTANT: Keep in sync with `ACTION_CABLE_REDIS_VERSION` in `.env`.
+      #
+      redis:
+        image: redis:7.2.4
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
 
     steps:
       ##
@@ -236,6 +255,7 @@ jobs:
       - name: Set up test Postgres
         run: RAILS_ENV=test task db:reset
         env:
+          ACTION_CABLE_REDIS_URL: redis://redis:6379/0
           PROJECT_NAME: blueprinter
           POSTGRES_HOST: postgres
           POSTGRES_PASSWORD: password
@@ -247,6 +267,7 @@ jobs:
       - name: Run RSpec
         run: task rspec
         env:
+          ACTION_CABLE_REDIS_URL: redis://redis:6379/0
           PROJECT_NAME: blueprinter
           POSTGRES_HOST: postgres
           POSTGRES_PASSWORD: password
@@ -258,6 +279,7 @@ jobs:
       - name: Run Turnip
         run: task turnip
         env:
+          ACTION_CABLE_REDIS_URL: redis://redis:6379/0
           CHROME_HOST: chrome
           CHROME_PORT: 4444
           PROJECT_NAME: blueprinter
