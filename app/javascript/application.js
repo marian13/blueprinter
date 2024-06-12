@@ -2,16 +2,16 @@
 import '@hotwired/turbo-rails'
 import 'controllers'
 
-import { dispayToast } from 'tools/toast'
+import { displayToast } from 'tools/toast'
 
-addEventListener(
+window.addEventListener(
   'turbo:before-stream-render',
   event => {
     const fallbackToDefaultActions = event.detail.render
 
     event.detail.render = streamElement => {
-      if (streamElement.action == 'toast') {
-        diplayToast()
+      if (streamElement.action === 'toast') {
+        displayToast()
       } else {
         fallbackToDefaultActions(streamElement)
       }

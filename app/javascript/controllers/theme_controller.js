@@ -11,8 +11,17 @@ export default class extends Controller {
   toggle () {
     Logger.info(`Triggered ${this.identifier}#toggle action`)
 
-    if (this.theme === 'light') return this.theme = 'dark'
-    if (this.theme === 'dark') return this.theme = 'light'
+    if (this.theme === 'light') {
+      this.theme = 'dark'
+
+      return
+    }
+
+    if (this.theme === 'dark') {
+      this.theme = 'light'
+
+      return
+    }
 
     this.theme = 'light'
   }

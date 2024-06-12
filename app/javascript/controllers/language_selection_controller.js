@@ -7,7 +7,7 @@ import { DEFAULT_LOCALE } from 'tools/locale'
 import { navigateTo } from 'tools/navigation'
 
 /**
- * NOTE: If controller file is named `language_selection_controller.js`	its identifier will be `language-selection`.
+ * NOTE: If controller file is named `language_selection_controller.js` then its identifier will be `language-selection`.
  * - https://stimulus.hotwired.dev/reference/controllers
  */
 export default class extends Controller {
