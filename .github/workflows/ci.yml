@@ -127,7 +127,7 @@ jobs:
       # NOTE: Required ENV vars can be found by `services -> rails -> environment` in `docker/development/docker-compose.yml`.
       #
       - name: Run DbSchemaChecker
-        run: task lint:db:schema
+        run: task db:schema:lint
         env:
           ACTION_CABLE_REDIS_URL: redis://redis:6379/0
           PROJECT_NAME: blueprinter
@@ -139,7 +139,7 @@ jobs:
       # NOTE: Required ENV vars can be found by `services -> rails -> environment` in `docker/development/docker-compose.yml`.
       #
       - name: Run Annotate (aka AnnotateModels)
-        run: task lint:annotate
+        run: task annotate:lint
         env:
           ACTION_CABLE_REDIS_URL: redis://redis:6379/0
           PROJECT_NAME: blueprinter

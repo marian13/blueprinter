@@ -326,8 +326,9 @@ tasks:
       - AUTOCORRECT={{.AUTOCORRECT}} task stylelint
       - AUTOCORRECT={{.AUTOCORRECT}} task standardjs
       - AUTOCORRECT={{.AUTOCORRECT}} task rubocop
-      - AUTOCORRECT={{.AUTOCORRECT}} task db:schema:lint
-      - AUTOCORRECT={{.AUTOCORRECT}} task annotate:lint
+      - task routes:unused
+      - task db:schema:lint
+      - task annotate:lint
 
   ##
   # NOTE: Detects unused routes. Exits with `0` when no unused routes found, `201` otherwise.
