@@ -225,9 +225,3 @@ gem "convenient_service", "~> 0.19.0"
 # - https://github.com/dry-rb/dry-initializer
 #
 gem "dry-initializer", "~> 3.1.1"
-
-##
-# Amazing Print - Pretty print your Ruby objects in full color and with proper indentation.
-# - https://github.com/amazing-print/amazing_print
-#
-gem "amazing_print", "~> 1.6.0"

@@ -8,7 +8,7 @@ module ApplicationService
     included do
       include ConvenientService::Standard::Config
 
-      if Rails.env.development? || Rails.env.test?
+      if Rails.env.local?
         include ConvenientService::AwesomePrintInspect::Config
       end
 
