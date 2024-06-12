@@ -218,10 +218,16 @@ end
 # Convenient Service - Service object pattern implementation in Ruby.
 # - https://github.com/marian13/convenient_service
 #
-gem "convenient_service", "~> 0.18.0"
+gem "convenient_service", "~> 0.19.0"
 
 ##
 # dry-initializer - DSL for building class initializer with params and options.
 # - https://github.com/dry-rb/dry-initializer
 #
 gem "dry-initializer", "~> 3.1.1"
+
+##
+# Amazing Print - Pretty print your Ruby objects in full color and with proper indentation.
+# - https://github.com/amazing-print/amazing_print
+#
+gem "amazing_print", "~> 1.6.0"
