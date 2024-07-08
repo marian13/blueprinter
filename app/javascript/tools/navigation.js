@@ -1,4 +1,4 @@
-import Turbo from 'turbo'
+import { Turbo } from '@hotwired/turbo-rails'
 
 const navigateTo = url => Turbo.visit(url)
 
