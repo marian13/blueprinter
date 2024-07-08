@@ -227,6 +227,11 @@ tasks:
     preconditions:
       - *from-host-os
 
+  ##
+  # Usage examples:
+  #   task docker:turnip
+  #   task docker:turnip -- spec/features/language/select_language/description.feature:28
+  #
   docker:turnip:
     cmds:
       - |
@@ -236,7 +241,7 @@ tasks:
           --rm \
           --publish {{.TURNIP_RAILS_PORT}}:{{.TURNIP_RAILS_PORT}} \
           rails \
-          bash -c 'task turnip'
+          bash -c 'task turnip -- {{.CLI_ARGS}}'
     interactive: true
     preconditions:
       - *from-host-os
@@ -427,10 +432,13 @@ tasks:
           --format progress \
           --format RSpecTurnipFormatter \
           --out tmp/turnip_report.html \
-          spec/features
+          {{.FEATURE_FILES}}
     interactive: true
     requires:
       vars: [TURNIP_RAILS_PORT]
+    vars:
+      FEATURE_FILES:
+        sh: ruby -e 'puts(if "{{.CLI_ARGS}}".empty? then "spec/features" else "{{.CLI_ARGS}}" end)'
 
   turnip:open:
     cmds:
