@@ -12,18 +12,27 @@ module Web
           def generate
             render partial: "web/pages/home/frames/create_app_button/generating_app_button"
 
+            ##
+            # TODO: Worker.
+            #
             ::Thread.new do
               ::Rails.application.executor.wrap do
-                sleep 5
+                result = ::GenerateApp.result
 
-                ##
-                # - https://www.hotrails.dev/turbo-rails/turbo-streams
-                #
-                ::Turbo::StreamsChannel.broadcast_replace_to(
-                  "create_app_button",
-                  target: "create_app_button",
-                  partial: "web/pages/home/frames/create_app_button/download_app_button"
-                )
+                if result.success?
+                  ##
+                  # - https://www.hotrails.dev/turbo-rails/turbo-streams
+                  #
+                  ::Turbo::StreamsChannel.broadcast_replace_to(
+                    "create_app_button",
+                    target: "create_app_button",
+                    partial: "web/pages/home/frames/create_app_button/download_app_button"
+                  )
+                elsif result.failure?
+
+                else
+
+                end
               end
             end
           end

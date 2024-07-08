@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # - https://userdocs.convenientservice.org/tldr
 #
@@ -9,7 +11,7 @@ module ApplicationService
       include ConvenientService::Standard::Config
 
       if Rails.env.local?
-        include ConvenientService::AwesomePrintInspect::Config
+        include ConvenientService::AmazingPrintInspect::Config
       end
 
       concerns do
