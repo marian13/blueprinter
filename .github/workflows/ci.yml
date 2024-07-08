@@ -160,7 +160,7 @@ jobs:
     #
     runs-on: ubuntu-20.04
     ##
-    # NOTE: `FROM ruby:3.3.2-slim` in `docker/development/rails/Dockerfile`.
+    # NOTE: `FROM ruby:3.3.3-slim` in `docker/development/rails/Dockerfile`.
     #
     # NOTE: How to run Docker containers in GitHub Actions?
     # - https://docs.github.com/en/actions/using-jobs/running-jobs-in-a-container
@@ -168,7 +168,7 @@ jobs:
     # NOTE: Docker container was NOT used before. It is added to have a way to work with Postgres.
     # - https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers#running-jobs-in-containers
     #
-    container: ruby:3.3.2-slim
+    container: ruby:3.3.3-slim
     name: Test
 
     services:
