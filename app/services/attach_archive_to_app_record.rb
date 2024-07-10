@@ -7,14 +7,8 @@ class AttachArchiveToAppRecord
   option :archive_path
 
   def result
-    app_record.archive.attach(::File.read(archive_path))
+    app_record.archive.attach(io: File.open(archive_path), filename: "archive.zip", content_type: "application/zip")
 
-    success(app_record: app_record)
-  end
-
-  private
-
-  def app_record
-    @app_record ||= ::App.new
+    success
   end
 end

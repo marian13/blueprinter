@@ -8,8 +8,7 @@ Rails.application.routes.draw do
       namespace :home do
         namespace :frames do
           post "create_app_button/generate", to: "create_app_button#generate"
-          post "create_app_button/generating", to: "create_app_button#generating"
-          post "create_app_button/download", to: "create_app_button#download"
+          get "create_app_button/download", to: "create_app_button#download"
         end
       end
     end

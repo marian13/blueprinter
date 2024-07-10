@@ -19,10 +19,6 @@ module Web
               ::Rails.application.executor.wrap do
                 result = ::GenerateApp.result
 
-
-                byebug
-                byebug
-
                 if result.success?
 
                 elsif result.failure?
@@ -36,22 +32,24 @@ module Web
 
           ##
           # replaces stream by frame
-          #   or pushes toast
-          # - https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb#L43
-          #
-          def generating
-            render turbo_stream.replace "create_app_button", partial: "web/pages/home/frames/create_app_button/download_app_button"
-          end
-
-          ##
-          # replaces stream by frame
           # starts download
           #   or pushes toast
           #
           def download
-            params
+            app = ::App.find(params[:app_record_id])
 
-            byebug
+            ##
+            # NOTE: `::ActiveStorage::Blob.service.path_for(app.archive.key)` is only for local disk storage. Use `redirect_to app.archive.url` for remote storages.
+            #
+            archive_path = ::ActiveStorage::Blob.service.path_for(app.archive.key)
+
+            options = {
+              filename: app.archive.filename.to_s,
+              type: app.archive.content_type,
+              disposition: "attachment"
+            }
+
+            send_file archive_path, **options
           end
         end
       end
