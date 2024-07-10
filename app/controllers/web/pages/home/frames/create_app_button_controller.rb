@@ -23,8 +23,6 @@ module Web
 
                 elsif result.failure?
 
-                else
-
                 end
               end
             end

@@ -6,7 +6,7 @@ class CreateAppRecord
   def result
     return error("App is not valid") unless app_record.valid?
 
-    app_record.save
+    app_record.save!
 
     success(app_record: app_record)
   end
