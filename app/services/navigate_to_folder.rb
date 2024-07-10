@@ -3,10 +3,10 @@
 class NavigateToFolder
   include ApplicationService::Config
 
-  option :path
+  option :folder_path
 
   def result
-    ::FileUtils.cd(path)
+    ::FileUtils.cd(folder_path)
 
     success
   end

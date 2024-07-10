@@ -225,3 +225,9 @@ gem "convenient_service", "~> 0.19.0"
 # - https://github.com/dry-rb/dry-initializer
 #
 gem "dry-initializer", "~> 3.1.1"
+
+##
+# rubyzip - Rubyzip is a ruby library for reading and writing zip files.
+# - https://github.com/rubyzip/rubyzip
+#
+gem "rubyzip", "~> 2.3.2"

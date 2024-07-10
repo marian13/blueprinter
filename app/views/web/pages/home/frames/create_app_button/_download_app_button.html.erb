@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "create_app_button" do %>
-  <%= link_to web_pages_home_frames_create_app_button_download_path, role: "button", data: {turbo_method: :post, "test-id" => "download_app_button"} do %>
+  <%= link_to web_pages_home_frames_create_app_button_download_path(app_record_id: app_record_id), role: "button", data: {turbo_method: :post, "test-id" => "download_app_button"} do %>
     <%= I18n.t("web.pages.home.frames.create_app_button.download_app_button.text") %>
   <% end %>
 <% end %>

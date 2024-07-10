@@ -393,6 +393,7 @@ DEPENDENCIES
   rubocop (~> 1.62.0)
   rubocop-rails (~> 2.23.1)
   rubocop-rspec (~> 2.29.2)
+  rubyzip (~> 2.3.2)
   selenium-webdriver
   site_prism (~> 5.0.1)
   sprockets-rails

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExecuteRailsNew
+class ExecuteRailsNewCommand
   include ApplicationService::Config
 
   def result

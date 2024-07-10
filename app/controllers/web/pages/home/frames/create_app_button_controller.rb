@@ -19,15 +19,12 @@ module Web
               ::Rails.application.executor.wrap do
                 result = ::GenerateApp.result
 
+
+                byebug
+                byebug
+
                 if result.success?
-                  ##
-                  # - https://www.hotrails.dev/turbo-rails/turbo-streams
-                  #
-                  ::Turbo::StreamsChannel.broadcast_replace_to(
-                    "create_app_button",
-                    target: "create_app_button",
-                    partial: "web/pages/home/frames/create_app_button/download_app_button"
-                  )
+
                 elsif result.failure?
 
                 else
@@ -52,6 +49,9 @@ module Web
           #   or pushes toast
           #
           def download
+            params
+
+            byebug
           end
         end
       end
