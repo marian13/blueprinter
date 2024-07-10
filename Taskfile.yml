@@ -46,7 +46,10 @@ tasks:
   #
   annotate:lint:
     cmds:
-      - bundle exec annotate --models --position-in-class=bottom --format=bare --exclude=tests --frozen
+      - bundle exec annotate --models --position-in-class=bottom --format=bare --exclude=tests {{.LINT_SUFFIX}}
+    vars:
+      LINT_SUFFIX:
+        sh: ruby -e 'puts "--frozen" if "{{.AUTOCORRECT}}" != "true"'
 
   bundle:
     cmds:
@@ -333,7 +336,7 @@ tasks:
       - AUTOCORRECT={{.AUTOCORRECT}} task rubocop
       - task routes:unused
       - task db:schema:lint
-      - task annotate:lint
+      - AUTOCORRECT={{.AUTOCORRECT}} task annotate:lint
 
   ##
   # NOTE: Detects unused routes. Exits with `0` when no unused routes found, `201` otherwise.
@@ -362,7 +365,7 @@ tasks:
       - bundle exec rubocop --config ./linters/.rubocop.yml {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
     vars:
       AUTOCORRECT_SUFFIX:
-        sh: ruby -e 'puts "-A" if ENV["AUTOCORRECT"] == "true"'
+        sh: ruby -e 'puts "-A" if "{{.AUTOCORRECT}}" == "true"'
 
   ##
   # NOTE: Usage examples.
@@ -374,7 +377,7 @@ tasks:
       - yarn run standard {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
     vars:
       AUTOCORRECT_SUFFIX:
-        sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'
+        sh: ruby -e 'puts "--fix" if "{{.AUTOCORRECT}}" == "true"'
 
   server:logs:test:
     cmds:
@@ -393,7 +396,7 @@ tasks:
       - yarn run stylelint --config ./linters/.stylelintrc.js {{.AUTOCORRECT_SUFFIX}} **/*.css
     vars:
       AUTOCORRECT_SUFFIX:
-        sh: ruby -e 'puts "--fix" if ENV["AUTOCORRECT"] == "true"'
+        sh: ruby -e 'puts "--fix" if "{{.AUTOCORRECT}}" == "true"'
 
   ##
   # NOTE: Dev only command.
